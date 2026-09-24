@@ -382,7 +382,7 @@
             display: grid;
             gap: 16px;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            contain: layout paint;
+            contain: layout;
         }
 
         .load-more {
@@ -417,7 +417,7 @@
             position: relative;
             aspect-ratio: 2.5 / 3.5;
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07), 0 10px 25px rgba(0, 0, 0, .22);
-            transition: box-shadow .25s ease;
+            transition: transform .28s cubic-bezier(.22, .8, .3, 1), box-shadow .28s ease;
             contain: layout paint;
             content-visibility: auto;
             contain-intrinsic-size: 210px 294px;
@@ -425,7 +425,8 @@
         }
 
         .card:hover {
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 15px 30px rgba(0, 0, 0, .4), 0 0 20px rgba(102, 136, 255, .2);
+            transform: translateY(-5px) scale(1.018);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 18px 34px rgba(0, 0, 0, .42), 0 0 24px rgba(102, 136, 255, .24);
         }
 
         .card.caught {
@@ -433,7 +434,12 @@
         }
 
         .card.caught:hover {
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .16), 0 15px 30px rgba(0, 0, 0, .4), 0 0 24px rgba(112, 217, 210, .24);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .16), 0 18px 34px rgba(0, 0, 0, .42), 0 0 28px rgba(112, 217, 210, .28);
+        }
+
+        .card:active {
+            transform: translateY(-2px) scale(.995);
+            transition-duration: .12s;
         }
 
         .card.has-card {
@@ -618,8 +624,8 @@
             border-radius: inherit;
             content: '';
             inset: 0;
-            mix-blend-mode: screen;
-            opacity: .72;
+            mix-blend-mode: normal;
+            opacity: .38;
             pointer-events: none;
             position: absolute;
             z-index: 3;
@@ -639,7 +645,7 @@
 
         @media (hover: hover) and (pointer: fine) {
             .card:hover {
-                animation: cardHoverShake .38s cubic-bezier(.22, .8, .3, 1);
+                animation: none;
             }
         }
 
@@ -865,7 +871,7 @@
                 background: linear-gradient(135deg, rgba(255, 83, 198, .3), rgba(255, 83, 198, .07) 28%, rgba(73, 183, 255, .36) 52%, rgba(137, 93, 255, .28) 74%, rgba(255, 93, 201, .3)), linear-gradient(108deg, transparent 34%, rgba(255, 89, 211, .34) 46%, rgba(73, 224, 255, .42) 55%, transparent 68%);
                 background-size: 100% 100%, 100% 100%;
                 background-position: 50% 50%, 50% 50%;
-                opacity: .58;
+                opacity: .48;
             }
 
             body.modal-open .card.foil::before {
