@@ -18,12 +18,16 @@
             --accent-soft: #9e8cff;
             --indigo: #766cf1;
             --cyan: #70d9d2;
-            --gold: #f3c96a;
             --bg: #0c1124;
         }
 
         * {
             box-sizing: border-box;
+        }
+
+        html {
+            overflow-y: scroll;
+            scrollbar-gutter: stable;
         }
 
         body {
@@ -33,24 +37,32 @@
             background-color: var(--bg);
             background-image: radial-gradient(circle at 5% 0%, rgba(102, 136, 255, .16), transparent 28%), radial-gradient(circle at 95% 10%, rgba(118, 108, 241, .13), transparent 25%), linear-gradient(rgba(120, 139, 210, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(120, 139, 210, .035) 1px, transparent 1px);
             background-size: auto, auto, 48px 48px, 48px 48px;
+            background-attachment: fixed;
+            background-repeat: no-repeat, no-repeat, repeat, repeat;
             min-height: 100vh;
         }
 
         .shell {
             width: min(1440px, calc(100% - 36px));
             margin: 0 auto;
-            padding: 28px 0 48px;
+            padding: 28px 0 110px;
         }
 
         .topbar {
             align-items: center;
-            margin-bottom: 32px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 18px;
+            text-align: center;
         }
 
         .sync-tools {
             align-items: center;
             display: flex;
+            flex-wrap: wrap;
             gap: 8px;
+            margin-left: auto;
         }
 
         .art-select {
@@ -59,8 +71,10 @@
             color: var(--ink);
             color-scheme: dark;
             cursor: pointer;
+            flex: 1 1 180px;
             font-size: 12px;
             min-height: 38px;
+            min-width: 0;
             padding-right: 28px;
         }
 
@@ -112,16 +126,19 @@
         .sync-button {
             align-items: center;
             background: rgba(102, 136, 255, .12);
-            border: 1px solid rgba(112, 217, 210, .25);
-            border-radius: 50%;
+            border: 1px solid rgba(112, 217, 210, .35);
+            border-radius: 9px;
             color: var(--cyan);
             cursor: pointer;
             display: flex;
-            height: 38px;
+            flex-shrink: 0;
+            font: 600 13px 'DM Sans', sans-serif;
+            gap: 8px;
             justify-content: center;
-            padding: 0;
+            margin: 0 auto;
+            min-height: 40px;
+            padding: 9px 15px;
             transition: background .2s, border-color .2s, transform .2s;
-            width: 38px;
         }
 
         .sync-button:hover {
@@ -131,32 +148,12 @@
         }
 
         .sync-button svg {
-            height: 17px;
-            width: 17px;
+            height: 16px;
+            width: 16px;
         }
 
         .sync-button::after {
-            background: var(--ink);
-            border: 1px solid var(--line);
-            border-radius: 6px;
-            color: var(--bg);
-            content: 'Atualizar PokéAPI';
-            font: 500 11px 'DM Sans';
-            opacity: 0;
-            padding: 5px 8px;
-            pointer-events: none;
-            position: absolute;
-            right: 0;
-            top: 46px;
-            transform: translateY(-3px);
-            transition: opacity .2s, transform .2s;
-            white-space: nowrap;
-            z-index: 3;
-        }
-
-        .sync-button:hover::after {
-            opacity: 1;
-            transform: translateY(0);
+            display: none;
         }
 
         .sync-button:disabled {
@@ -165,11 +162,76 @@
             transform: none;
         }
 
+        .section-nav {
+            background: rgba(18, 24, 47, .96);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            bottom: 12px;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, .2);
+            display: grid;
+            gap: 8px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            left: 50%;
+            max-width: 520px;
+            padding: 8px;
+            position: fixed;
+            transform: translateX(-50%);
+            width: calc(100% - 24px);
+            z-index: 40;
+        }
+
+        .nav-tab {
+            align-items: center;
+            background: transparent;
+            border: 0;
+            border-radius: 12px;
+            color: var(--muted);
+            cursor: pointer;
+            display: flex;
+            font-size: 0;
+            justify-content: center;
+            min-height: 42px;
+            padding: 8px;
+            transition: all .2s ease;
+        }
+
+        .nav-tab svg {
+            display: block;
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .nav-tab[data-screen="config"] svg {
+            height: 18px;
+            width: 18px;
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, rgba(102, 136, 255, .18), rgba(112, 217, 210, .12));
+            border: 1px solid rgba(112, 217, 210, .24);
+            color: var(--ink);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
         .stats {
             display: grid;
             gap: 12px;
-            grid-template-columns: repeat(3, 1fr);
-            margin-bottom: 26px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            margin: 0 auto 26px;
+            max-width: 900px;
         }
 
         .stat {
@@ -229,6 +291,118 @@
             gap: 10px;
             margin-bottom: 24px;
             padding: 12px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            gap: 18px;
+            grid-template-columns: 1fr;
+            max-width: 900px;
+            margin: 18px auto 0;
+        }
+
+        #dashboardScreen .panel {
+            width: 100%;
+        }
+
+        #dashboardScreen .panel h3 {
+            text-align: center;
+        }
+
+        .panel {
+            background: linear-gradient(145deg, rgba(25, 33, 61, .96), rgba(18, 24, 47, .96));
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 18px 18px 16px;
+        }
+
+        .config-panel {
+            display: grid;
+            gap: 18px;
+            max-width: 420px;
+            margin: 18px auto 0;
+            width: min(100%, 420px);
+        }
+
+        #configScreen.active {
+            display: flex;
+            justify-content: center;
+        }
+
+        .config-row {
+            display: grid;
+            gap: 8px;
+        }
+
+        .config-row label {
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .panel h3 {
+            font: 700 16px 'Space Grotesk';
+            letter-spacing: -.03em;
+            margin: 0 0 14px;
+        }
+
+        .insight-list {
+            display: grid;
+            gap: 12px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .insight-list li {
+            align-items: center;
+            color: var(--muted);
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, .05);
+        }
+
+        .insight-list li:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .region-list {
+            display: grid;
+            gap: 18px 26px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            margin-top: 8px;
+        }
+
+        .region-line {
+            align-items: center;
+            display: grid;
+            gap: 8px;
+            grid-template-columns: 1fr auto;
+        }
+
+        .region-line span {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .bar {
+            background: rgba(255, 255, 255, .04);
+            border-radius: 999px;
+            display: block;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .bar>i {
+            background: linear-gradient(90deg, var(--accent), var(--cyan));
+            border-radius: inherit;
+            display: block;
+            height: 100%;
         }
 
         .search {
@@ -405,8 +579,23 @@
         .notice {
             color: var(--muted);
             font-size: 12px;
-            margin-top: 18px;
-            text-align: right;
+            margin: 18px auto 0;
+            text-align: center;
+            width: min(100%, 420px);
+        }
+
+        #configScreen.active {
+            display: flex;
+            justify-content: center;
+        }
+
+        #configScreen {
+            display: none;
+        }
+
+        #configScreen.active {
+            display: flex;
+            justify-content: center;
         }
 
         .notice strong {
@@ -429,11 +618,35 @@
             }
 
             .sync-tools {
-                align-self: flex-end;
+                align-self: stretch;
+                justify-content: space-between;
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .art-select {
+                flex: 1 1 180px;
+                width: 100%;
+            }
+
+            .section-nav {
+                width: calc(100% - 16px);
+            }
+
+            .nav-tab {
+                min-height: 40px;
             }
 
             .stats {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .region-list {
+                grid-template-columns: 1fr;
             }
 
             .stat {
@@ -490,66 +703,110 @@
 <body>
     <main class="shell">
         <header class="topbar">
-            <div><span class="eyebrow">Minha coleção</span>
-                <h1>Pokédex</h1>
-            </div>
-            <div class="sync-tools">
-                <select class="art-select" id="artStyle" aria-label="Estilo de arte" onchange="changeArtStyle()">
-                    <option value="pixel" selected>Pixel art</option>
-                    <option value="official">Ilustração oficial</option>
-                    <option value="home">Arte HOME</option>
-                    <option value="dream">Dream World</option>
-                </select>
-                <button class="sync-button" id="syncButton" type="button" onclick="syncPokeApi()"
-                    aria-label="Atualizar dados da PokéAPI"><svg aria-hidden="true" fill="none" stroke="currentColor"
-                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M20 11a8.1 8.1 0 0 0-14.8-4L3 10"></path>
-                        <path d="M3 4v6h6"></path>
-                        <path d="M4 13a8.1 8.1 0 0 0 14.8 4L21 14"></path>
-                        <path d="M21 20v-6h-6"></path>
-                    </svg></button>
+            <h1>Pokédex</h1>
             </div>
         </header>
-        <section class="stats" aria-label="Estatísticas">
-            <div class="stat"><span class="stat-label">Progresso total</span><strong class="stat-value"
-                    id="progressStat">--</strong>
-                <div class="progress"><span id="progressBar" style="width:0%"></span></div>
+
+        <section class="screen active" id="pokedexScreen" aria-label="Pokédex">
+            <section class="toolbar" aria-label="Filtros">
+                <label class="search"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor"
+                        viewBox="0 0 24 24" width="16">
+                        <circle cx="11" cy="11" r="7"></circle>
+                        <path d="m20 20-4-4"></path>
+                    </svg><input id="search" type="search" placeholder="Buscar por nome ou número..."
+                        oninput="filterGrid()"></label>
+                <select id="regionFilter" aria-label="Filtrar por região" onchange="filterGrid()">
+                    <option value="ALL">Todas as regiões</option>
+                </select>
+                <select id="statusFilter" aria-label="Filtrar por status" onchange="filterGrid()">
+                    <option value="ALL">Todos</option>
+                    <option value="CAUGHT">Somente Capturados</option>
+                    <option value="NOT_CAUGHT">Somente Faltantes</option>
+                </select>
+            </section>
+            <section class="collection-heading">
+                </div><span class="result-count" id="resultCount">Carregando...</span>
+            </section>
+            <section class="grid" id="pokedexGrid" aria-live="polite"></section>
+        </section>
+
+        <section class="screen" id="dashboardScreen" aria-label="Dashboard de progresso" hidden>
+            <section class="stats" aria-label="Estatísticas da coleção">
+                <div class="stat"><span class="stat-label">Progresso total</span><strong class="stat-value"
+                        id="progressStat">--</strong>
+                    <div class="progress"><span id="progressBar" style="width:0%"></span></div>
+                </div>
+                <div class="stat"><span class="stat-label">Capturados</span><strong class="stat-value"
+                        id="caughtStat">--</strong></div>
+                <div class="stat"><span class="stat-label">Faltantes</span><strong class="stat-value"
+                        id="missingStat">--</strong></div>
+            </section>
+
+            <div class="dashboard-grid">
+                <article class="panel">
+                    <h3>Progresso por região</h3>
+                    <div id="regionStats" class="region-list"></div>
+                </article>
             </div>
-            <div class="stat"><span class="stat-label">Capturados</span><strong class="stat-value"
-                    id="caughtStat">--</strong></div>
-            <div class="stat"><span class="stat-label">Faltantes</span><strong class="stat-value"
-                    id="missingStat">--</strong></div>
         </section>
-        <section class="toolbar" aria-label="Filtros">
-            <label class="search"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor"
-                    viewBox="0 0 24 24" width="16">
-                    <circle cx="11" cy="11" r="7"></circle>
-                    <path d="m20 20-4-4"></path>
-                </svg><input id="search" type="search" placeholder="Buscar por nome ou número..."
-                    oninput="filterGrid()"></label>
-            <select id="regionFilter" aria-label="Filtrar por região" onchange="filterGrid()">
-                <option value="ALL">Todas as regiões</option>
-            </select>
-            <select id="statusFilter" aria-label="Filtrar por status" onchange="filterGrid()">
-                <option value="ALL">Todos</option>
-                <option value="CAUGHT">Somente Capturados</option>
-                <option value="NOT_CAUGHT">Somente Faltantes</option>
-            </select>
+
+        <section class="screen" id="configScreen" aria-label="Configurações" hidden>
+            <div class="panel config-panel">
+                <div class="config-row">
+                    <label for="artStyle">Estilo da arte</label>
+                    <select class="art-select" id="artStyle" aria-label="Estilo de arte" onchange="changeArtStyle()">
+                        <option value="pixel" selected>Pixel art</option>
+                        <option value="official">Ilustração oficial</option>
+                        <option value="home">Arte HOME</option>
+                        <option value="dream">Dream World</option>
+                    </select>
+                </div>
+                <div class="config-row">
+                    <button class="sync-button" id="syncButton" type="button" onclick="syncPokeApi()"
+                        aria-label="Atualizar dados da PokéAPI"><svg aria-hidden="true" fill="none"
+                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M20 11a8.1 8.1 0 0 0-14.8-4L3 10"></path>
+                            <path d="M3 4v6h6"></path>
+                            <path d="M4 13a8.1 8.1 0 0 0 14.8 4L21 14"></path>
+                            <path d="M21 20v-6h-6"></path>
+                        </svg><span>Atualizar dados da PokéAPI</span></button>
+                </div>
+                <p class="notice" id="cacheNotice">Carregando coleção...</p>
+            </div>
         </section>
-        <section class="collection-heading">
-            <div><span class="section-kicker">Coleção</span>
-                <h2>Todos os Pokémon</h2>
-            </div><span class="result-count" id="resultCount">Carregando...</span>
-        </section>
-        <section class="grid" id="pokedexGrid" aria-live="polite"></section>
-        <p class="notice" id="cacheNotice">Carregando coleção...</p>
     </main>
+
+    <nav class="section-nav" aria-label="Navegação principal">
+        <button class="nav-tab active" type="button" data-screen="pokedex" aria-label="Pokédex">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3.5 12h17" />
+                <circle cx="12" cy="12" r="2.5" fill="currentColor" stroke="none" />
+            </svg>
+        </button>
+        <button class="nav-tab" type="button" data-screen="dashboard" aria-label="Progresso">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 10.5v6" />
+                <circle cx="12" cy="7.2" r=".8" fill="currentColor" stroke="none" />
+            </svg>
+        </button>
+        <button class="nav-tab" type="button" data-screen="config" aria-label="Configurações">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="3.2" />
+                <path
+                    d="M19.4 15a1.7 1.7 0 0 0 .34 1.86l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15.5 20a1.7 1.7 0 0 0-1 .45 1.7 1.7 0 0 0-.37 1.13V22a2 2 0 1 1-4 0v-.08A1.7 1.7 0 0 0 9.5 20a1.7 1.7 0 0 0-1-.45 1.7 1.7 0 0 0-1.13.37l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4 15.5a1.7 1.7 0 0 0-.45-1 1.7 1.7 0 0 0-1.13-.37H2a2 2 0 1 1 0-4h.08A1.7 1.7 0 0 0 4 9.5a1.7 1.7 0 0 0 .45-1 1.7 1.7 0 0 0-.37-1.13l-.06-.06A2 2 0 1 1 6.85 4.48l.06.06A1.7 1.7 0 0 0 8.5 4a1.7 1.7 0 0 0 1-.45 1.7 1.7 0 0 0 .37-1.13V2a2 2 0 1 1 4 0v.08A1.7 1.7 0 0 0 14.5 4a1.7 1.7 0 0 0 1 .45 1.7 1.7 0 0 0 1.13-.37l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 20 8.5a1.7 1.7 0 0 0 .45 1 1.7 1.7 0 0 0 1.13.37H22a2 2 0 1 1 0 4h-.08A1.7 1.7 0 0 0 20 14.5a1.7 1.7 0 0 0-.45 1Z" />
+            </svg>
+        </button>
+    </nav>
 
     <script>
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/1kpvD475Y7qJvoS8m-0yJ5nBy02t8RUlo2gKdkttuTW0/gviz/tq?tqx=out:csv&gid=1886680311';
         const API_CACHE_KEY = 'dexviewer-pokeapi-v1';
         const ART_STYLE_KEY = 'dexviewer-art-style';
         const CACHE_TTL = 7 * 24 * 60 * 60 * 1000;
+        const REGION_ORDER = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Paldea'];
         localStorage.removeItem('dexviewer-collection-v2');
         let pokemonData = [];
         let apiData = {};
@@ -584,12 +841,50 @@
         }
         function setCacheNotice(timestamp, label) { document.getElementById('cacheNotice').innerHTML = `<strong>${label}</strong> · ${timestamp ? `atualizado em ${new Date(timestamp).toLocaleDateString('pt-BR')}` : 'pronto para sincronizar'}`; }
         function populateRegions() { const select = document.getElementById('regionFilter'); const current = select.value; select.innerHTML = '<option value="ALL">Todas as regiões</option>';[...new Set(pokemonData.map(p => p.region))].filter(Boolean).sort().forEach(region => { const option = new Option(region, region); select.add(option); }); select.value = [...select.options].some(o => o.value === current) ? current : 'ALL'; }
+        function setScreen(screenName) {
+            const screens = document.querySelectorAll('.screen');
+            const tabs = document.querySelectorAll('.nav-tab');
+            screens.forEach(screen => {
+                const isActive = screen.id === `${screenName}Screen`;
+                screen.classList.toggle('active', isActive);
+                screen.hidden = !isActive;
+            });
+            tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.screen === screenName));
+        }
+
         function render() { populateRegions(); updateStats(); filterGrid(); }
         function getPokemonImage(extra, style, id) { const official = extra?.sprites?.official || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`; if (style === 'pixel') return extra?.sprites?.pixel || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`; return extra?.sprites?.[style] || official; }
         function changeArtStyle() { artStyle = document.getElementById('artStyle').value; localStorage.setItem(ART_STYLE_KEY, artStyle); filterGrid(); if (['home', 'dream'].includes(artStyle) && pokemonData.some(p => !apiData[p.id]?.sprites?.[artStyle])) syncPokeApi(); }
         function filterGrid() { const search = document.getElementById('search').value.toLowerCase().trim(); const region = document.getElementById('regionFilter').value; const status = document.getElementById('statusFilter').value; const filtered = pokemonData.filter(p => (!search || p.name.toLowerCase().includes(search) || String(p.id).includes(search)) && (region === 'ALL' || p.region === region) && (status === 'ALL' || (status === 'CAUGHT' ? p.caught : !p.caught))); renderGrid(filtered); document.getElementById('resultCount').textContent = `${filtered.length} de ${pokemonData.length} Pokémon`; }
         function renderGrid(list) { const grid = document.getElementById('pokedexGrid'); grid.innerHTML = list.length ? '' : '<div class="empty">Nenhum Pokémon encontrado com esses filtros.</div>'; list.forEach(p => { const extra = apiData[p.id] || {}; const displayName = extra.name || p.name; const card = document.createElement('article'); card.className = `card ${p.caught ? 'caught' : 'not-caught'}`; card.innerHTML = `<div class="card-top"><span class="number">#${String(p.id).padStart(3, '0')}</span><span class="status ${p.caught ? 'caught' : 'missing'}">${p.caught ? '● Capturado' : '○ Faltante'}</span></div><div class="card-visual"><img class="${artStyle === 'pixel' ? 'pixel-art' : ''}" src="${getPokemonImage(extra, artStyle, p.id)}" alt="${displayName}" loading="lazy"></div><div class="name">${displayName}</div>`; grid.appendChild(card); }); }
-        function updateStats() { const total = pokemonData.length; const caught = pokemonData.filter(p => p.caught).length; const percentage = total ? Math.round(caught / total * 100) : 0; document.getElementById('progressStat').textContent = `${percentage}%`; document.getElementById('caughtStat').textContent = caught; document.getElementById('missingStat').textContent = total - caught; document.getElementById('progressBar').style.width = `${percentage}%`; }
+        function updateStats() {
+            const total = pokemonData.length;
+            const caught = pokemonData.filter(p => p.caught).length;
+            const missing = total - caught;
+            const percentage = total ? Math.round(caught / total * 100) : 0;
+            const regionStatsMap = pokemonData.reduce((acc, pokemon) => {
+                const region = pokemon.region || 'Sem região';
+                if (!acc[region]) acc[region] = { total: 0, caught: 0 };
+                acc[region].total += 1;
+                if (pokemon.caught) acc[region].caught += 1;
+                return acc;
+            }, {});
+            const regionEntries = Object.entries(regionStatsMap)
+                .map(([region, data]) => ({ region, total: data.total, caught: data.caught, percent: data.total ? Math.round((data.caught / data.total) * 100) : 0 }))
+                .sort((a, b) => {
+                    const orderDiff = (REGION_ORDER.indexOf(a.region) === -1 ? 999 : REGION_ORDER.indexOf(a.region)) - (REGION_ORDER.indexOf(b.region) === -1 ? 999 : REGION_ORDER.indexOf(b.region));
+                    return orderDiff !== 0 ? orderDiff : a.region.localeCompare(b.region);
+                });
+            document.getElementById('progressStat').textContent = `${percentage}%`;
+            document.getElementById('caughtStat').textContent = caught;
+            document.getElementById('missingStat').textContent = missing;
+            document.getElementById('progressBar').style.width = `${percentage}%`;
+
+            const regionStats = document.getElementById('regionStats');
+            regionStats.innerHTML = regionEntries.map(({ region, caught, total, percent }) => {
+                return `<div><div class="region-line"><span>${region}</span><strong>${percent}%</strong></div><div class="bar"><i style="width:${percent}%"></i></div><div class="region-line" style="margin-top:4px;"><span>${caught}/${total} capturados</span></div></div>`;
+            }).join('') || '<p class="empty">Sem dados de região.</p>';
+        }
 
         async function syncPokeApi() {
             if (!pokemonData.length) return;
@@ -598,7 +893,12 @@
             for (let index = 0; index < ids.length; index += 20) { await Promise.all(ids.slice(index, index + 20).map(async id => { try { const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`); if (response.ok) { const item = await response.json(); apiData[id] = { name: item.name, image: item.sprites.other?.['official-artwork']?.front_default || item.sprites.front_default, sprites: { official: item.sprites.other?.['official-artwork']?.front_default, home: item.sprites.other?.home?.front_default, dream: item.sprites.other?.dream_world?.front_default, pixel: item.sprites.front_default }, types: item.types.map(type => type.type.name) }; } } catch { /* mantém o item anterior em caso de falha */ } completed++; button.setAttribute('aria-label', `Sincronizando ${completed} de ${ids.length}`); })); }
             writeCache(API_CACHE_KEY, { savedAt: Date.now(), data: apiData }); renderGrid(pokemonData); setCacheNotice(Date.now(), 'PokéAPI sincronizada'); button.disabled = false; button.setAttribute('aria-label', 'Atualizar dados da PokéAPI');
         }
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => setScreen(tab.dataset.screen));
+        });
+
         document.getElementById('artStyle').value = artStyle;
+        setScreen('pokedex');
         loadPokedex();
     </script>
 </body>
