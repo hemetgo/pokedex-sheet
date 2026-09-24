@@ -600,7 +600,7 @@
             border-radius: inherit;
             background: radial-gradient(ellipse 70% 48% at 50% 50%, rgba(255, 255, 255, .28), transparent 58%), linear-gradient(115deg, rgba(255, 70, 170, .13), rgba(255, 218, 92, .1) 22%, rgba(72, 235, 255, .15) 43%, rgba(116, 126, 255, .13) 62%, rgba(218, 92, 255, .12) 78%, rgba(255, 80, 170, .13));
             background-size: 100% 100%, 270% 100%;
-            mix-blend-mode: screen;
+            mix-blend-mode: normal;
             opacity: .58;
             pointer-events: none;
             z-index: 3;
@@ -613,13 +613,13 @@
         }
 
         .card.foil::before {
-            background: radial-gradient(ellipse at 52% 42%, rgba(255, 255, 255, .22), transparent 48%), linear-gradient(112deg, transparent 27%, rgba(255, 255, 255, .07) 38%, rgba(255, 255, 255, .36) 50%, rgba(255, 255, 255, .07) 62%, transparent 73%), linear-gradient(115deg, rgba(255, 70, 170, .16), rgba(255, 218, 92, .12) 22%, rgba(72, 235, 255, .18) 43%, rgba(116, 126, 255, .15) 62%, rgba(218, 92, 255, .14) 78%, rgba(255, 80, 170, .16));
-            background-size: 100% 100%, 260% 100%, 100% 100%;
+            background: linear-gradient(135deg, rgba(255, 83, 198, .46), rgba(255, 83, 198, .12) 24%, rgba(73, 183, 255, .48) 48%, rgba(137, 93, 255, .42) 72%, rgba(255, 93, 201, .44)), linear-gradient(108deg, transparent 31%, rgba(255, 89, 211, .65) 44%, rgba(73, 224, 255, .65) 54%, transparent 68%);
+            background-size: 180% 180%, 260% 100%;
             border-radius: inherit;
             content: '';
             inset: 0;
-            mix-blend-mode: normal;
-            opacity: .58;
+            mix-blend-mode: screen;
+            opacity: .72;
             pointer-events: none;
             position: absolute;
             z-index: 3;
@@ -628,8 +628,13 @@
         }
 
         @keyframes gridCardFoil {
-            from { background-position: 0 0, -35% 50%; }
-            to { background-position: 0 0, 135% 50%; }
+            from {
+                background-position: 0 0, -35% 50%;
+            }
+
+            to {
+                background-position: 100% 100%, 135% 50%;
+            }
         }
 
         @media (hover: hover) and (pointer: fine) {
@@ -639,11 +644,25 @@
         }
 
         @keyframes cardHoverShake {
-            0% { transform: translate3d(0, 0, 0) rotate(0deg); }
-            28% { transform: translate3d(-1px, 0, 0) rotate(-.35deg); }
-            56% { transform: translate3d(1px, -1px, 0) rotate(.3deg); }
-            78% { transform: translate3d(-.5px, 0, 0) rotate(-.12deg); }
-            100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+            0% {
+                transform: translate3d(0, 0, 0) rotate(0deg);
+            }
+
+            28% {
+                transform: translate3d(-1px, 0, 0) rotate(-.35deg);
+            }
+
+            56% {
+                transform: translate3d(1px, -1px, 0) rotate(.3deg);
+            }
+
+            78% {
+                transform: translate3d(-.5px, 0, 0) rotate(-.12deg);
+            }
+
+            100% {
+                transform: translate3d(0, 0, 0) rotate(0deg);
+            }
         }
 
         .card.foil.is-visible .grid-foil-layer {
@@ -655,6 +674,7 @@
                 animation: none;
                 background-position: 0 0, 0 50%;
             }
+
         }
 
         @keyframes foilShimmer {
@@ -707,7 +727,6 @@
         .modal-overlay {
             align-items: center;
             background: rgba(6, 9, 20, .92);
-            /* Fundo sólido sem blur pesado para zerar o lag */
             display: flex;
             inset: 0;
             justify-content: center;
@@ -757,11 +776,9 @@
             position: relative;
             transform-style: preserve-3d;
             will-change: transform;
-            /* Aceleração de hardware */
             background: #141c35;
             overflow: hidden;
             touch-action: none;
-            /* Permite arrastar o dedo suavemente sobre a carta */
             transition: none;
             --modal-foil-x: 50%;
             --modal-foil-y: 50%;
@@ -792,16 +809,16 @@
         }
 
         .modal-card-sprite img {
-            max-height: 84%;
-            max-width: 94%;
+            max-height: 92%;
+            max-width: 96%;
             object-fit: contain;
             filter: drop-shadow(0 15px 15px rgba(0, 0, 0, .5));
-            transform: scale(1.16);
+            transform: none;
         }
 
         .modal-card-sprite img.pixel-art {
             image-rendering: pixelated;
-            transform: scale(1.28);
+            transform: none;
         }
 
         .modal-card-sprite.silhouetted img {
@@ -816,15 +833,15 @@
             border-radius: inherit;
             mix-blend-mode: screen;
             opacity: 0;
-            background: radial-gradient(ellipse 68% 46% at var(--modal-foil-x) var(--modal-foil-y), rgba(255, 255, 255, .28), rgba(255, 255, 255, .05) 34%, transparent 66%), linear-gradient(135deg, rgba(255, 70, 170, .14), rgba(255, 218, 92, .1) 22%, rgba(72, 235, 255, .16) 43%, rgba(116, 126, 255, .13) 62%, rgba(218, 92, 255, .12) 78%, rgba(255, 80, 170, .14));
-            background-size: 100% 100%, 100% 100%;
-            background-color: rgba(255, 255, 255, .06);
+            background: linear-gradient(135deg, rgba(255, 83, 198, .52), rgba(255, 83, 198, .14) 25%, rgba(73, 183, 255, .56) 49%, rgba(137, 93, 255, .5) 73%, rgba(255, 93, 201, .5)), radial-gradient(ellipse 68% 46% at var(--modal-foil-x) var(--modal-foil-y), rgba(71, 224, 255, .48), transparent 68%);
+            background-size: 180% 180%, 100% 100%;
+            filter: saturate(1.35);
             overflow: hidden;
             transition: opacity .2s ease;
         }
 
         .modal-foil-layer::after {
-            background: radial-gradient(ellipse at center, rgba(255, 255, 255, .7), rgba(255, 255, 255, .2) 38%, transparent 74%), linear-gradient(90deg, transparent, rgba(255, 255, 255, .12) 24%, rgba(255, 255, 255, .58) 50%, rgba(255, 255, 255, .12) 76%, transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 68, 190, .7) 24%, rgba(139, 93, 255, .72) 45%, rgba(55, 226, 255, .72) 60%, transparent 84%);
             border-radius: 50%;
             content: '';
             bottom: -30%;
@@ -838,66 +855,26 @@
             width: 65%;
         }
 
-        .modal-foil-layer::before {
-            background: radial-gradient(circle at 16% 24%, rgba(255, 255, 255, .95) 0 1px, transparent 3px), radial-gradient(circle at 78% 18%, rgba(255, 235, 137, .9) 0 1px, transparent 3px), radial-gradient(circle at 84% 68%, rgba(159, 239, 255, .95) 0 1.5px, transparent 4px), radial-gradient(circle at 24% 78%, rgba(255, 169, 225, .9) 0 1px, transparent 3px), radial-gradient(circle at 58% 34%, rgba(255, 255, 255, .72) 0 1px, transparent 3px), radial-gradient(circle at 43% 88%, rgba(190, 173, 255, .85) 0 1px, transparent 3px);
-            content: '';
-            inset: 0;
-            opacity: .4;
-            pointer-events: none;
-            position: absolute;
-            animation: foilSparklePulse 2.1s ease-in-out infinite alternate;
-        }
-
-        @keyframes foilSparklePulse {
-            from { opacity: .22; }
-            to { opacity: .72; }
-        }
-
         .modal-card-3d.is-foil .modal-foil-layer {
-            opacity: .48;
+            opacity: .62;
         }
 
         @media (hover: none) {
-            .grid-foil-layer {
-                opacity: 0;
-                display: block;
-                animation: none !important;
-                background: radial-gradient(ellipse at 52% 42%, rgba(255, 255, 255, .28), transparent 48%), linear-gradient(135deg, rgba(255, 70, 170, .2), rgba(255, 218, 92, .14) 23%, rgba(72, 235, 255, .2) 45%, rgba(116, 126, 255, .16) 64%, rgba(218, 92, 255, .15) 80%, rgba(255, 80, 170, .2));
-                background-size: 100% 100%, 100% 100%;
-                mix-blend-mode: screen;
-                opacity: .8;
-            }
-
             .card.foil::before {
                 animation: none;
-                background: radial-gradient(ellipse at 52% 42%, rgba(255, 255, 255, .26), transparent 48%), linear-gradient(112deg, transparent 27%, rgba(255, 255, 255, .08) 38%, rgba(255, 255, 255, .4) 50%, rgba(255, 255, 255, .08) 62%, transparent 73%), linear-gradient(135deg, rgba(255, 70, 170, .18), rgba(255, 218, 92, .14) 23%, rgba(72, 235, 255, .2) 45%, rgba(116, 126, 255, .16) 64%, rgba(218, 92, 255, .15) 80%, rgba(255, 80, 170, .18));
-                background-size: 100% 100%, 260% 100%, 100% 100%;
-                opacity: .34;
-            }
-
-            .card.foil.mobile-foil-active::before {
-                animation: gridCardFoil var(--foil-duration, 3.6s) ease-in-out infinite alternate;
-                animation-delay: var(--foil-delay, 0s);
-                opacity: .62;
+                background: linear-gradient(135deg, rgba(255, 83, 198, .3), rgba(255, 83, 198, .07) 28%, rgba(73, 183, 255, .36) 52%, rgba(137, 93, 255, .28) 74%, rgba(255, 93, 201, .3)), linear-gradient(108deg, transparent 34%, rgba(255, 89, 211, .34) 46%, rgba(73, 224, 255, .42) 55%, transparent 68%);
+                background-size: 100% 100%, 100% 100%;
+                background-position: 50% 50%, 50% 50%;
+                opacity: .58;
             }
 
             body.modal-open .card.foil::before {
                 animation: none !important;
                 opacity: 0 !important;
             }
-
-            .modal-foil-layer {
-                mix-blend-mode: normal;
-                filter: none;
-            }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .modal-foil-layer::before {
-                animation: none;
-                opacity: .4;
-            }
-
             .card:hover {
                 animation: none;
             }
@@ -905,7 +882,6 @@
             .modal-card-3d.is-foil .modal-foil-layer {
                 animation: none;
             }
-
         }
 
         .modal-details {
@@ -1122,7 +1098,7 @@
             <svg viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="12" cy="12" r="3.2" />
                 <path
-                    d="M19.4 15a1.7 1.7 0 0 0 .34 1.86l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15.5 20a1.7 1.7 0 0 0-1 .45 1.7 1.7 0 0 0-.37 1.13V22a2 2 0 1 1-4 0v-.08A1.7 1.7 0 0 0 9.5 20a1.7 1.7 0 0 0-1-.45 1.7 1.7 0 0 0-1.13.37l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4 15.5a1.7 1.7 0 0 0-.45-1 1.7 1.7 0 0 0-1.13-.37H2a2 2 0 1 1 0-4h.08A1.7 1.7 0 0 0 4 9.5a1.7 1.7 0 0 0 .45-1 1.7 1.7 0 0 0-.37-1.13l-.06-.06A2 2 0 1 1 6.85 4.48l.06.06A1.7 1.7 0 0 0 8.5 4a1.7 1.7 0 0 0 1-.45 1.7 1.7 0 0 0 .37-1.13V2a2 2 0 1 1 4 0v.08A1.7 1.7 0 0 0 14.5 4a1.7 1.7 0 0 0 1 .45 1.7 1.7 0 0 0 1.13-.37l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 20 8.5a1.7 1.7 0 0 0 .45 1 1.7 1.7 0 0 0 1.13.37H22a2 2 0 1 1 0 4h-.08A1.7 1.7 0 0 0 20 14.5a1.7 1.7 0 0 0-.45 1Z" />
+                    d="M19.4 15a1.7 1.7 0 0 0 .34 1.86l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15.5 20a1.7 1.7 0 0 0-1 .45 1.7 1.7 0 0 0-.37 1.13V22a2 2 0 1 1-4 0v-.08A1.7 1.7 0 0 0 9.5 20a1.7 1.7 0 0 0-1-.45 1.7 1.7 0 0 0-1.13.37l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4 15.5a1.7 1.7 0 0 0-.45-1 1.7 1.7 0 0 0-1.13-.37H2a2 2 0 1 1 0-4h.08A1.7 1.7 0 0 0 4 9.5a1.7 1.7 0 0 0 .45-1 1.7 1.7 0 0 0-.37-1.13l-.06-.06A2 2 0 1 1 6.85 4.48l.06.06A1.7 1.7 0 0 0 8.5 4a1.7 1.7 0 0 0 1-.45 1.7 1.7 0 0 0 .37-1.13V2a2 2 0 1 1 4 0v.08A1.7 1.7 0 0 0 14.5 4a1.7 1.7 0 0 0 1 .45 1.7 1.7 0 0 0 1.13-.37l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 20 8.5a1.7 1.7 0 0 0 .45 1 1.7 1.7 0 0 0 1.13-.37H22a2 2 0 1 1 0 4h-.08A1.7 1.7 0 0 0 20 14.5a1.7 1.7 0 0 0-.45 1Z" />
             </svg>
         </button>
     </nav>
@@ -1384,61 +1360,6 @@
         window.addEventListener('scroll', queueGridFoilDraw, { passive: true });
         window.addEventListener('resize', queueGridFoilDraw, { passive: true });
 
-        let mobileFoilRotationTimer = 0;
-        let mobileFoilQueue = [];
-
-        function isMobileFoilViewport() {
-            return window.innerWidth <= 680 || window.matchMedia('(hover: none)').matches;
-        }
-
-        function stopMobileFoilRotation() {
-            if (mobileFoilRotationTimer) {
-                clearTimeout(mobileFoilRotationTimer);
-                mobileFoilRotationTimer = 0;
-            }
-            document.querySelectorAll('#pokedexGrid .mobile-foil-active').forEach(card => card.classList.remove('mobile-foil-active'));
-            mobileFoilQueue = [];
-        }
-
-        function rotateMobileFoils(replaceOne = false) {
-            if (!isMobileFoilViewport() || document.body.classList.contains('modal-open')) {
-                stopMobileFoilRotation();
-                return;
-            }
-
-            const visibleFoils = Array.from(document.querySelectorAll('#pokedexGrid .card.foil.is-visible'));
-            const visibleSet = new Set(visibleFoils);
-            const activeFoils = Array.from(document.querySelectorAll('#pokedexGrid .card.mobile-foil-active'));
-            activeFoils.filter(card => !visibleSet.has(card)).forEach(card => card.classList.remove('mobile-foil-active'));
-
-            mobileFoilQueue = mobileFoilQueue.filter(card => visibleSet.has(card) && !card.classList.contains('mobile-foil-active'));
-            visibleFoils.forEach(card => {
-                if (!card.classList.contains('mobile-foil-active') && !mobileFoilQueue.includes(card)) {
-                    mobileFoilQueue.push(card);
-                }
-            });
-
-            if (replaceOne) {
-                const activeVisible = activeFoils.filter(card => visibleSet.has(card));
-                if (activeVisible.length) {
-                    const leavingCard = activeVisible[Math.floor(Math.random() * activeVisible.length)];
-                    leavingCard.classList.remove('mobile-foil-active');
-                    if (!mobileFoilQueue.includes(leavingCard)) mobileFoilQueue.push(leavingCard);
-                }
-            }
-
-            while (document.querySelectorAll('#pokedexGrid .card.mobile-foil-active').length < 2 && mobileFoilQueue.length) {
-                mobileFoilQueue.shift().classList.add('mobile-foil-active');
-            }
-
-            if (!mobileFoilRotationTimer && visibleFoils.length) {
-                mobileFoilRotationTimer = setTimeout(() => {
-                    mobileFoilRotationTimer = 0;
-                    rotateMobileFoils(true);
-                }, 1800 + Math.random() * 1100);
-            }
-        }
-
         function observeVisibleFoils() {
             if (foilObserver) foilObserver.disconnect();
 
@@ -1446,7 +1367,6 @@
             if (!('IntersectionObserver' in window)) {
                 foilCards.forEach(card => card.classList.add('is-visible'));
                 queueGridFoilDraw();
-                rotateMobileFoils();
                 return;
             }
 
@@ -1454,12 +1374,10 @@
                 entries.forEach(entry => {
                     entry.target.classList.toggle('is-visible', entry.isIntersecting);
                 });
-                rotateMobileFoils();
             }, { threshold: 0 });
 
             foilCards.forEach(card => foilObserver.observe(card));
             queueGridFoilDraw();
-            rotateMobileFoils();
         }
 
         function renderGrid(list) {
@@ -1659,7 +1577,6 @@
 
             modal.classList.add('active');
             document.body.classList.add('modal-open');
-            stopMobileFoilRotation();
         }
 
         function closeModal(e) {
@@ -1680,7 +1597,6 @@
             modalVelocityX = 0;
             modalVelocityY = 0;
             isCurrentCardCaught = false;
-            rotateMobileFoils();
         }
 
         function updateCardTransform(rect, x, y) {
