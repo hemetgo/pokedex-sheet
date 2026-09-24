@@ -495,10 +495,10 @@
             </div>
             <div class="sync-tools">
                 <select class="art-select" id="artStyle" aria-label="Estilo de arte" onchange="changeArtStyle()">
+                    <option value="pixel" selected>Pixel art</option>
                     <option value="official">Ilustração oficial</option>
                     <option value="home">Arte HOME</option>
                     <option value="dream">Dream World</option>
-                    <option value="pixel">Pixel art</option>
                 </select>
                 <button class="sync-button" id="syncButton" type="button" onclick="syncPokeApi()"
                     aria-label="Atualizar dados da PokéAPI"><svg aria-hidden="true" fill="none" stroke="currentColor"
@@ -553,7 +553,7 @@
         localStorage.removeItem('dexviewer-collection-v2');
         let pokemonData = [];
         let apiData = {};
-        let artStyle = localStorage.getItem(ART_STYLE_KEY) || 'official';
+        let artStyle = localStorage.getItem(ART_STYLE_KEY) || 'pixel';
 
         function parseCSVLine(line) {
             const result = []; let current = ''; let inQuotes = false;
