@@ -34,6 +34,12 @@
             box-sizing: border-box;
         }
 
+        img {
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-user-drag: none;
+        }
+
         html {
             overflow-y: scroll;
             scrollbar-gutter: stable;
@@ -430,7 +436,7 @@
             padding: 8px 0;
         }
 
-        .grid > .empty {
+        .grid>.empty {
             grid-column: 1 / -1;
         }
 
@@ -631,7 +637,6 @@
             animation: foilShimmer 2.8s ease-in-out infinite alternate;
         }
 
-        /* Foil do grid: camada própria do card, sem depender do canvas global. */
         .grid-foil-layer {
             display: none !important;
         }
@@ -1122,7 +1127,7 @@
     </nav>
 
     <script>
-        const CSV_URL = 'https://docs.google.com/spreadsheets/d/1kpvD475Y7qJvoS8m-0yJ5nBy02t8RUlo2gKdkttuTW0/gviz/tq?tqx=out:csv';
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/1ncztc6ySbYxSqXPeQKgQjztWfI_UiO1fYHBrvzvhD7Y/gviz/tq?tqx=out:csv&gid=0';
         const API_CACHE_KEY = 'dexviewer-pokeapi-v1';
         const ART_STYLE_KEY = 'dexviewer-art-style';
         const CACHE_TTL = 7 * 24 * 60 * 60 * 1000;
@@ -1183,23 +1188,36 @@
             return ['true', 'sim', 'yes', '1', 'x', 'foil', 'holo', 'brilhante'].includes(String(value || '').trim().toLowerCase());
         }
 
+        function getRegionByDexId(id) {
+            const dexId = Number(id);
+            if (dexId <= 151) return 'Kanto';
+            if (dexId <= 251) return 'Johto';
+            if (dexId <= 386) return 'Hoenn';
+            if (dexId <= 493) return 'Sinnoh';
+            if (dexId <= 649) return 'Unova';
+            if (dexId <= 721) return 'Kalos';
+            if (dexId <= 809) return 'Alola';
+            if (dexId <= 898) return 'Galar';
+            if (dexId <= 905) return 'Hisui';
+            return 'Paldea';
+        }
+
         function parseSheet(data) {
             const rows = data.split(/\r?\n/).filter(r => r.trim());
             if (rows.length < 2) return [];
 
             const headers = parseCSVLine(rows[0]);
 
-            let idCol = findColumn(headers, ['#', 'id', 'numero', 'number', 'n', 'code', 'num']);
-            let caughtCol = findColumn(headers, ['pego', 'capturado', 'caught', 'status']);
+            let idCol = findColumn(headers, ['index', 'id']);
             let nameCol = findColumn(headers, ['pokemon', 'nome', 'name']);
-            let regionCol = findColumn(headers, ['regiao', 'region']);
-            let foilCol = findColumn(headers, ['foil', 'brilhante', 'holo']);
-            let cardCol = findColumn(headers, ['card', 'carta', 'imagemcarta', 'cardurl', 'image', 'link', 'url']);
+            let foilCol = findColumn(headers, ['foil']);
+            let cardCol = findColumn(headers, ['card_url', 'url', 'link']);
+            let caughtCol = findColumn(headers, ['caught', 'capturado', 'pego', 'status']);
 
             if (idCol < 0) idCol = 0;
-            if (caughtCol < 0) caughtCol = 1;
-            if (nameCol < 0) nameCol = 2;
-            if (regionCol < 0) regionCol = 3;
+            if (nameCol < 0) nameCol = 1;
+            if (foilCol < 0) foilCol = 2;
+            if (cardCol < 0) cardCol = 3;
 
             return rows.slice(1).map((row, index) => {
                 const cols = parseCSVLine(row);
@@ -1210,13 +1228,23 @@
                 const name = cols[nameCol] || `Pokémon #${id}`;
                 if (!id || !name) return null;
 
+                const cardUrl = (cardCol >= 0 && cols[cardCol]) ? cols[cardCol].trim() : '';
+                const foil = parseBoolean(cols[foilCol]);
+
+                // Verifica a coluna 'caught'/'capturado' na planilha
+                const isCaughtFromCol = caughtCol >= 0 ? parseBoolean(cols[caughtCol]) : false;
+
+                // Considera capturado se 'caught = true' OU se possuir URL de carta
+                const caught = isCaughtFromCol || !!cardUrl;
+
                 return {
                     id,
-                    caught: parseBoolean(cols[caughtCol]),
+                    caught,
                     name,
-                    region: (regionCol >= 0 && cols[regionCol]) ? cols[regionCol] : 'Sem região',
-                    foil: parseBoolean(cols[foilCol]),
-                    cardUrl: (cardCol >= 0 && cols[cardCol]) ? cols[cardCol].trim() : ''
+                    region: getRegionByDexId(id),
+                    foil,
+                    cardUrl,
+                    sourceCardUrl: cardUrl
                 };
             }).filter(Boolean);
         }
@@ -1427,7 +1455,7 @@
                 section.innerHTML = `
                     <div class="region-heading">
                         <h3 id="${regionId}">${region}</h3>
-                        <span>${grouped[region].length} ${grouped[region].length === 1 ? 'Pokémon' : 'Pokémons'}</span>
+                        <span>${grouped[region].length} ${grouped[region].length === 1 ? 'Pokémon' : 'Pokémon'}</span>
                     </div>
                     <div class="region-grid"><div class="region-loading">Carregando...</div></div>
                 `;
@@ -1438,43 +1466,44 @@
                     if (renderVersion !== gridRenderVersion) return;
                     regionGrid.innerHTML = '';
                     grouped[region].forEach(p => {
-                const extra = apiData[p.id] || {};
-                const displayName = formatPokemonName(extra.name || p.name);
-                const card = document.createElement('article');
+                        const extra = apiData[p.id] || {};
+                        const displayName = formatPokemonName(extra.name || p.name);
+                        const card = document.createElement('article');
 
-                const hasCard = p.caught && p.cardUrl;
-                const foilLayer = p.caught && p.foil ? '<span class="grid-foil-layer" aria-hidden="true"></span>' : '';
-                const foilCorner = p.caught && p.foil ? '<span class="foil-corner" aria-label="Carta foil">★ FOIL</span>' : '';
+                        const hasCard = p.caught && p.cardUrl;
+                        const foilLayer = p.caught && p.foil ? '<span class="grid-foil-layer" aria-hidden="true"></span>' : '';
+                        const foilCorner = p.caught && p.foil ? '<span class="foil-corner" aria-label="Carta foil">★ FOIL</span>' : '';
 
-                let cardClasses = `card ${p.caught ? 'caught' : 'not-caught'}`;
-                if (p.caught && p.foil) cardClasses += ' foil';
-                if (hasCard) cardClasses += ' has-card';
-                card.className = cardClasses;
+                        let cardClasses = `card ${p.caught ? 'caught' : 'not-caught'}`;
+                        if (p.caught && p.foil) cardClasses += ' foil';
+                        if (hasCard) cardClasses += ' has-card';
+                        card.className = cardClasses;
 
-                if (p.caught && p.foil) {
-                    const foilPhase = (p.id * 37) % 17;
-                    card.style.setProperty('--foil-delay', `-${(foilPhase / 10).toFixed(2)}s`);
-                    card.style.setProperty('--foil-duration', `${(2.55 + ((p.id * 13) % 9) / 10).toFixed(2)}s`);
-                }
+                        if (p.caught && p.foil) {
+                            const foilPhase = (p.id * 37) % 17;
+                            card.style.setProperty('--foil-delay', `-${(foilPhase / 10).toFixed(2)}s`);
+                            card.style.setProperty('--foil-duration', `${(2.55 + ((p.id * 13) % 9) / 10).toFixed(2)}s`);
+                        }
 
-                card.onclick = () => openModal(p, displayName, extra);
+                        card.onclick = () => openModal(p, displayName, extra);
 
-                if (hasCard) {
-                    card.innerHTML = `
+                        if (hasCard) {
+                            const fallbackCardImage = getPokemonImage(extra, artStyle, p.id);
+                            card.innerHTML = `
                         <div class="card-visual">
-                            <img class="tcg-img" src="${p.cardUrl}" alt="${displayName}" loading="lazy" decoding="async" fetchpriority="low" onerror="this.onerror=null; this.src='${getPokemonImage(extra, artStyle, p.id)}';">
+                            <img class="tcg-img" src="${p.cardUrl}" alt="${displayName}" loading="lazy" decoding="async" fetchpriority="low" onerror="this.onerror=null; this.src='${fallbackCardImage}';">
                             ${foilLayer}
                         </div>
                         ${foilCorner}
                     `;
-                } else {
-                    let visualHTML = `<div class="card-visual"><img class="${artStyle === 'pixel' ? 'pixel-art' : ''}" src="${getPokemonImage(extra, artStyle, p.id)}" alt="${displayName}" loading="lazy" decoding="async" fetchpriority="low">${foilLayer}</div>`;
+                        } else {
+                            let visualHTML = `<div class="card-visual"><img class="${artStyle === 'pixel' ? 'pixel-art' : ''}" src="${getPokemonImage(extra, artStyle, p.id)}" alt="${displayName}" loading="lazy" decoding="async" fetchpriority="low">${foilLayer}</div>`;
 
-                    let statusBadge = p.caught
-                        ? (p.foil ? '<span class="status foil-badge">★ Foil</span>' : '<span class="status caught">● Capturado</span>')
-                        : '<span class="status missing">○ Faltante</span>';
+                            let statusBadge = p.caught
+                                ? (p.foil ? '<span class="status foil-badge">★ Foil</span>' : '<span class="status caught">● Capturado</span>')
+                                : '<span class="status missing">○ Faltante</span>';
 
-                    card.innerHTML = `
+                            card.innerHTML = `
                         <div class="card-top">
                             <span class="number">#${String(p.id).padStart(3, '0')}</span>
                             ${statusBadge}
@@ -1483,8 +1512,8 @@
                         <div class="name">${displayName}</div>
                         ${foilCorner}
                     `;
-                }
-                    regionGrid.appendChild(card);
+                        }
+                        regionGrid.appendChild(card);
                     });
                     observeVisibleFoils();
                 };
@@ -1585,12 +1614,14 @@
         let modalCurrentY = 0;
         let modalVelocityX = 0;
         let modalVelocityY = 0;
+        let modalPokemonId = null;
 
         function clamp(value, min, max) {
             return Math.min(Math.max(value, min), max);
         }
 
         function openModal(pokemon, displayName, extra) {
+            modalPokemonId = pokemon.id;
             isCurrentCardCaught = pokemon.caught;
             const isFoil = pokemon.caught && pokemon.foil;
 
@@ -1605,7 +1636,8 @@
 
             if (pokemon.caught) {
                 if (pokemon.cardUrl) {
-                    modalCardBody.innerHTML = `<img class="modal-card-img" src="${pokemon.cardUrl}" alt="${displayName}">`;
+                    const fallbackCardImage = getPokemonImage(extra, artStyle, pokemon.id);
+                    modalCardBody.innerHTML = `<img class="modal-card-img" src="${pokemon.cardUrl}" alt="${displayName}" onerror="this.onerror=null; this.src='${fallbackCardImage}';">`;
                 } else {
                     modalCardBody.innerHTML = `
                         <div class="modal-card-sprite">
@@ -1646,6 +1678,7 @@
             modalVelocityX = 0;
             modalVelocityY = 0;
             isCurrentCardCaught = false;
+            modalPokemonId = null;
         }
 
         function updateCardTransform(rect, x, y) {
