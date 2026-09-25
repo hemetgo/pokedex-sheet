@@ -372,13 +372,6 @@
             width: 100%;
         }
 
-        .result-count {
-            color: var(--muted);
-            font-size: 12px;
-            margin-left: auto;
-            padding: 0 5px;
-        }
-
         /* --- GRID E CARDS --- */
         .grid {
             display: grid;
@@ -387,22 +380,48 @@
             contain: layout;
         }
 
-        .load-more {
-            background: rgba(102, 136, 255, .12);
-            border: 1px solid var(--line);
-            border-radius: 9px;
-            color: var(--ink);
-            cursor: pointer;
-            display: block;
+        .region-section {
+            display: grid;
+            gap: 16px;
             grid-column: 1 / -1;
-            font: 600 13px 'DM Sans', sans-serif;
-            margin: 22px auto 0;
-            min-height: 40px;
-            padding: 9px 18px;
+            min-width: 0;
         }
 
-        .load-more:hover {
-            border-color: var(--cyan);
+        .region-heading {
+            align-items: center;
+            display: flex;
+            gap: 12px;
+            margin: 16px 0 0;
+        }
+
+        .region-heading::after {
+            background: linear-gradient(90deg, var(--line), transparent);
+            content: '';
+            flex: 1;
+            height: 1px;
+        }
+
+        .region-heading h3 {
+            color: var(--ink);
+            font: 700 18px 'Space Grotesk', sans-serif;
+            letter-spacing: -.03em;
+            margin: 0;
+        }
+
+        .region-heading span {
+            color: var(--muted);
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .region-grid {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        }
+
+        .grid > .empty {
+            grid-column: 1 / -1;
         }
 
         .card {
@@ -705,13 +724,6 @@
             z-index: 2;
         }
 
-        .collection-heading {
-            align-items: flex-end;
-            display: flex;
-            justify-content: space-between;
-            margin: 18px 0 14px;
-        }
-
         .empty {
             color: var(--muted);
             grid-column: 1 / -1;
@@ -949,10 +961,6 @@
                 width: 100%;
             }
 
-            .collection-heading {
-                margin: 14px 0 10px;
-            }
-
             .grid {
                 gap: 10px;
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1007,9 +1015,6 @@
                     <option value="CAUGHT">Somente Capturados</option>
                     <option value="NOT_CAUGHT">Somente Faltantes</option>
                 </select>
-            </section>
-            <section class="collection-heading">
-                <span class="result-count" id="resultCount">Carregando...</span>
             </section>
             <section class="grid" id="pokedexGrid" aria-live="polite"></section>
         </section>
@@ -1122,8 +1127,6 @@
         let apiData = {};
         let artStyle = localStorage.getItem(ART_STYLE_KEY) || 'pixel';
         let isCurrentCardCaught = false;
-        const CARDS_PER_BATCH = 48;
-        let visibleCardCount = CARDS_PER_BATCH;
         let foilObserver = null;
 
         async function cacheImage(url) {
@@ -1292,9 +1295,7 @@
                 (region === 'ALL' || p.region === region) &&
                 (status === 'ALL' || (status === 'CAUGHT' ? p.caught : !p.caught))
             );
-            visibleCardCount = CARDS_PER_BATCH;
             renderGrid(filtered);
-            document.getElementById('resultCount').textContent = `${filtered.length} de ${pokemonData.length} Pokémon`;
         }
 
         const gridFoilCanvas = document.getElementById('gridFoilCanvas');
@@ -1390,10 +1391,46 @@
 
         function renderGrid(list) {
             const grid = document.getElementById('pokedexGrid');
-            const visibleList = list.slice(0, visibleCardCount);
             grid.innerHTML = list.length ? '' : '<div class="empty">Nenhum Pokémon encontrado com esses filtros.</div>';
 
-            visibleList.forEach(p => {
+            if (!list.length) {
+                observeVisibleFoils();
+                return;
+            }
+
+            const releaseOrder = ['kanto', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos', 'alola', 'galar', 'hisui', 'paldea'];
+            const normalizeRegion = region => region.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+            const grouped = list.reduce((groups, pokemon) => {
+                const region = pokemon.region || 'Sem região';
+                (groups[region] ||= []).push(pokemon);
+                return groups;
+            }, {});
+
+            const regions = Object.keys(grouped).sort((first, second) => {
+                const firstIndex = releaseOrder.indexOf(normalizeRegion(first));
+                const secondIndex = releaseOrder.indexOf(normalizeRegion(second));
+                if (firstIndex < 0 && secondIndex < 0) return first.localeCompare(second, 'pt-BR');
+                if (firstIndex < 0) return 1;
+                if (secondIndex < 0) return -1;
+                return firstIndex - secondIndex;
+            });
+
+            regions.forEach(region => {
+                const section = document.createElement('section');
+                const regionId = `region-${normalizeRegion(region).replace(/[^a-z0-9]+/g, '-')}`;
+                section.className = 'region-section';
+                section.setAttribute('aria-labelledby', regionId);
+                section.innerHTML = `
+                    <div class="region-heading">
+                        <h3 id="${regionId}">${region}</h3>
+                        <span>${grouped[region].length} ${grouped[region].length === 1 ? 'Pokémon' : 'Pokémons'}</span>
+                    </div>
+                    <div class="region-grid"></div>
+                `;
+                const regionGrid = section.querySelector('.region-grid');
+                grid.appendChild(section);
+
+                grouped[region].forEach(p => {
                 const extra = apiData[p.id] || {};
                 const displayName = formatPokemonName(extra.name || p.name);
                 const card = document.createElement('article');
@@ -1440,20 +1477,9 @@
                         ${foilCorner}
                     `;
                 }
-                grid.appendChild(card);
+                    regionGrid.appendChild(card);
+                });
             });
-
-            if (visibleList.length < list.length) {
-                const loadMore = document.createElement('button');
-                loadMore.className = 'load-more';
-                loadMore.type = 'button';
-                loadMore.textContent = `Mostrar mais (${list.length - visibleList.length})`;
-                loadMore.onclick = () => {
-                    visibleCardCount += CARDS_PER_BATCH;
-                    renderGrid(list);
-                };
-                grid.appendChild(loadMore);
-            }
 
             observeVisibleFoils();
         }
