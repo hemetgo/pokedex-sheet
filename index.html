@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -27,7 +27,93 @@
             --indigo: #766cf1;
             --cyan: #70d9d2;
             --gold: #ffcb05;
-            --bg: #0c1124;
+            --bg: #0b1220;
+            --color-scheme: dark;
+            --page-glow-a: rgba(74, 222, 203, .18);
+            --page-glow-b: rgba(129, 140, 248, .2);
+            --grid-line: rgba(120, 139, 210, .035);
+            --panel-gradient: linear-gradient(145deg, rgba(24, 36, 58, .96), rgba(15, 25, 43, .98));
+            --panel-solid: #18243a;
+            --card-gradient: linear-gradient(145deg, #1e3150, #15243c);
+            --missing-card-gradient: linear-gradient(145deg, rgba(22, 30, 58, .75), rgba(15, 22, 44, .9));
+            --input-bg: #0f1b2f;
+            --nav-bg: rgba(18, 24, 47, .96);
+            --progress-track: #2a3850;
+            --modal-overlay: rgba(6, 9, 20, .92);
+            --modal-card-bg: #141c35;
+            --sprite-gradient: radial-gradient(circle at center, #232e54 0%, #10172d 100%);
+            --title-gradient: linear-gradient(105deg, #fff 15%, #ff9ab0 52%, #9fa8ff 90%);
+            --soft-surface: rgba(102, 136, 255, .16);
+            --soft-surface-hover: rgba(102, 136, 255, .3);
+            --cyan-surface: rgba(112, 217, 210, .14);
+            --cyan-surface-hover: rgba(112, 217, 210, .23);
+            --neutral-surface: rgba(255, 255, 255, .1);
+        }
+
+        [data-theme="light"] {
+            --ink: #17233a;
+            --muted: #61718a;
+            --panel: #ffffff;
+            --line: #d6dfec;
+            --accent: #3e73df;
+            --accent-soft: #7b8cf0;
+            --indigo: #5c55cf;
+            --cyan: #087f88;
+            --gold: #af7600;
+            --bg: #edf3f8;
+            --color-scheme: light;
+            --page-glow-a: rgba(83, 137, 235, .16);
+            --page-glow-b: rgba(117, 104, 213, .11);
+            --grid-line: rgba(86, 112, 153, .08);
+            --panel-gradient: linear-gradient(145deg, rgba(255, 255, 255, .98), rgba(244, 248, 253, .98));
+            --panel-solid: #ffffff;
+            --card-gradient: linear-gradient(145deg, #ffffff, #e8eef7);
+            --missing-card-gradient: linear-gradient(145deg, rgba(255, 255, 255, .72), rgba(218, 228, 240, .9));
+            --input-bg: #ffffff;
+            --nav-bg: rgba(255, 255, 255, .96);
+            --progress-track: #dce5f0;
+            --modal-overlay: rgba(20, 31, 51, .72);
+            --modal-card-bg: #e8eef7;
+            --sprite-gradient: radial-gradient(circle at center, #ffffff 0%, #dfe8f3 100%);
+            --title-gradient: linear-gradient(105deg, #263f78 15%, #4772cb 52%, #625ac9 90%);
+            --soft-surface: rgba(62, 115, 223, .09);
+            --soft-surface-hover: rgba(62, 115, 223, .16);
+            --cyan-surface: rgba(8, 127, 136, .09);
+            --cyan-surface-hover: rgba(8, 127, 136, .15);
+            --neutral-surface: rgba(23, 35, 58, .06);
+        }
+
+        [data-theme="pokedex"] {
+            --ink: #fffdf4;
+            --muted: #b8c5dc;
+            --panel: #1d2d50;
+            --line: #405577;
+            --accent: #e3350d;
+            --accent-soft: #ffcb05;
+            --indigo: #3b4cca;
+            --cyan: #ffcb05;
+            --gold: #ffcb05;
+            --bg: #0b1930;
+            --color-scheme: dark;
+            --page-glow-a: rgba(227, 53, 13, .2);
+            --page-glow-b: rgba(59, 76, 202, .24);
+            --grid-line: transparent;
+            --panel-gradient: linear-gradient(145deg, #21365d, #172845);
+            --panel-solid: #1d2d50;
+            --card-gradient: linear-gradient(145deg, #2a4774, #1a2e50);
+            --missing-card-gradient: linear-gradient(145deg, rgba(35, 57, 91, .78), rgba(14, 29, 53, .94));
+            --input-bg: #122440;
+            --nav-bg: rgba(11, 25, 48, .94);
+            --progress-track: #304a70;
+            --modal-overlay: rgba(5, 12, 26, .9);
+            --modal-card-bg: #172946;
+            --sprite-gradient: radial-gradient(circle at center, #365987 0%, #10213b 100%);
+            --title-gradient: linear-gradient(105deg, #fff 12%, #ffcb05 48%, #e3350d 88%);
+            --soft-surface: rgba(227, 53, 13, .17);
+            --soft-surface-hover: rgba(227, 53, 13, .29);
+            --cyan-surface: rgba(255, 203, 5, .15);
+            --cyan-surface-hover: rgba(255, 203, 5, .25);
+            --neutral-surface: rgba(255, 255, 255, .11);
         }
 
         * {
@@ -50,10 +136,10 @@
             color: var(--ink);
             font: 15px 'DM Sans', sans-serif;
             background-color: var(--bg);
-            background-image: radial-gradient(circle at 5% 0%, rgba(102, 136, 255, .16), transparent 28%), radial-gradient(circle at 95% 10%, rgba(118, 108, 241, .13), transparent 25%), linear-gradient(rgba(120, 139, 210, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(120, 139, 210, .035) 1px, transparent 1px);
-            background-size: auto, auto, 48px 48px, 48px 48px;
+            background-image: radial-gradient(circle at 8% 0%, var(--page-glow-a), transparent 31%), radial-gradient(circle at 92% 8%, var(--page-glow-b), transparent 29%), linear-gradient(180deg, rgba(255, 255, 255, .025), transparent 32%);
+            background-size: auto, auto, auto;
             background-attachment: fixed;
-            background-repeat: no-repeat, no-repeat, repeat, repeat;
+            background-repeat: no-repeat;
             min-height: 100vh;
         }
 
@@ -68,12 +154,20 @@
             display: flex;
             justify-content: space-between;
             gap: 24px;
-            margin-bottom: 18px;
+            margin-bottom: 24px;
+            min-height: 100px;
+            position: relative;
             text-align: left;
         }
 
         .brand-lockup {
             min-width: 0;
+            position: absolute;
+            left: 50%;
+            text-align: center;
+            transform: translateX(-50%);
+            width: max-content;
+            max-width: 50%;
         }
 
         .brand-kicker {
@@ -97,6 +191,7 @@
             flex-wrap: wrap;
             gap: 9px;
             justify-content: flex-end;
+            margin-left: auto;
         }
 
         .sheet-action-group {
@@ -108,44 +203,42 @@
 
         .selected-sheet {
             align-items: center;
-            background: rgba(112, 217, 210, .08);
-            border: 1px solid rgba(112, 217, 210, .24);
+            background: var(--soft-surface);
+            border: 1px solid color-mix(in srgb, var(--accent) 32%, var(--line));
             border-radius: 12px;
             color: var(--ink);
             cursor: pointer;
             display: flex;
             font: inherit;
-            gap: 10px;
+            gap: 9px;
             max-width: 260px;
-            min-height: 42px;
-            padding: 7px 12px;
+            min-height: 38px;
+            padding: 6px 11px;
             text-align: left;
             transition: background .2s ease, border-color .2s ease, transform .2s ease;
         }
 
         .selected-sheet:hover,
         .selected-sheet:focus-visible {
-            background: rgba(112, 217, 210, .15);
-            border-color: var(--cyan);
+            background: var(--cyan-surface-hover);
+            border-color: var(--accent);
             outline: none;
             transform: translateY(-1px);
         }
 
         .selected-sheet-icon {
             align-items: center;
-            background: rgba(112, 217, 210, .14);
-            border-radius: 8px;
-            color: var(--cyan);
+            color: var(--accent);
             display: flex;
-            flex: 0 0 28px;
-            height: 28px;
+            flex: 0 0 22px;
+            height: 22px;
             justify-content: center;
-            width: 28px;
+            width: 22px;
         }
 
         .selected-sheet-icon svg {
-            height: 19px;
-            width: 19px;
+            height: 18px;
+            width: 18px;
         }
 
         .selected-sheet-copy {
@@ -154,7 +247,7 @@
         }
 
         .selected-sheet-label {
-            color: var(--muted);
+            color: var(--accent);
             font-size: 10px;
             letter-spacing: .08em;
             text-transform: uppercase;
@@ -196,9 +289,10 @@
 
         .header-button.secondary,
         .modal-button.secondary {
-            background: rgba(102, 136, 255, .1);
+            background: var(--soft-surface);
             border: 1px solid var(--line);
             color: var(--ink);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06);
         }
 
         .header-button svg,
@@ -218,12 +312,38 @@
             width: 18px;
         }
 
+        .example-sheet-button {
+            align-items: center;
+            background: var(--cyan-surface);
+            border: 1px solid var(--cyan);
+            border-radius: 10px;
+            color: var(--cyan);
+            display: inline-flex;
+            font-size: 12px;
+            font-weight: 700;
+            gap: 7px;
+            justify-content: center;
+            min-height: 42px;
+            padding: 9px 14px;
+            text-decoration: none;
+            transition: transform .2s ease, background .2s ease, border-color .2s ease;
+            width: 100%;
+        }
+
+        .example-sheet-button:hover,
+        .example-sheet-button:focus-visible {
+            background: var(--cyan-surface-hover);
+            border-color: var(--cyan);
+            outline: none;
+            transform: translateY(-1px);
+        }
+
         .art-select {
-            background: #10172d;
+            background: var(--input-bg);
             border: 1px solid var(--line);
             border-radius: 9px;
             color: var(--ink);
-            color-scheme: dark;
+            color-scheme: var(--color-scheme);
             cursor: pointer;
             font-size: 13px;
             min-height: 38px;
@@ -241,7 +361,7 @@
         }
 
         h1 {
-            background: linear-gradient(105deg, #fff 15%, #ff9ab0 52%, #9fa8ff 90%);
+            background: var(--title-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -253,8 +373,8 @@
 
         .sync-button {
             align-items: center;
-            background: rgba(102, 136, 255, .12);
-            border: 1px solid rgba(112, 217, 210, .35);
+            background: var(--soft-surface);
+            border: 1px solid var(--cyan);
             border-radius: 9px;
             color: var(--cyan);
             cursor: pointer;
@@ -271,7 +391,7 @@
         }
 
         .sync-button:hover {
-            background: rgba(102, 136, 255, .25);
+            background: var(--soft-surface-hover);
             border-color: var(--cyan);
             transform: translateY(-2px);
         }
@@ -288,17 +408,19 @@
         }
 
         .section-nav {
-            background: rgba(18, 24, 47, .96);
-            border-top: 1px solid var(--line);
+            background: var(--nav-bg);
+            border-top: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+            border-left: 0;
+            border-right: 0;
             border-radius: 0;
-            bottom: 0;
-            box-shadow: 0 -10px 30px rgba(0, 0, 0, .24);
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, .22), inset 0 1px 0 rgba(255, 255, 255, .04);
             display: grid;
             gap: 8px;
             grid-template-columns: repeat(3, minmax(0, 1fr));
+            bottom: 0;
             left: 0;
             max-width: none;
-            padding: 8px max(8px, calc((100% - 520px) / 2));
+            padding: 7px max(12px, calc((100% - 680px) / 2));
             position: fixed;
             right: 0;
             transform: none;
@@ -310,21 +432,24 @@
             align-items: center;
             background: transparent;
             border: 0;
-            border-radius: 12px;
-            color: var(--muted);
+            border-radius: 13px;
+            color: var(--ink);
             cursor: pointer;
             display: flex;
-            font-size: 0;
+            flex-direction: column;
+            font-size: 11px;
+            font-weight: 700;
+            gap: 4px;
             justify-content: center;
-            min-height: 42px;
-            padding: 8px;
-            transition: all .2s ease;
+            min-height: 48px;
+            padding: 8px 10px;
+            transition: color .2s ease, background .2s ease, transform .2s ease;
         }
 
         .nav-tab svg {
             display: block;
-            width: 22px;
-            height: 22px;
+            width: 19px;
+            height: 19px;
             stroke: currentColor;
             fill: none;
             stroke-width: 1.8;
@@ -333,10 +458,38 @@
         }
 
         .nav-tab.active {
-            background: linear-gradient(135deg, rgba(102, 136, 255, .18), rgba(112, 217, 210, .12));
-            border: 1px solid rgba(112, 217, 210, .24);
+            background: var(--soft-surface-hover);
+            border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--line));
+            color: var(--accent);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .14), inset 0 -3px 0 var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .nav-tab.active svg {
+            filter: drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 55%, transparent));
+        }
+
+        .nav-tab span {
+            display: block;
+            line-height: 1;
+        }
+
+        .nav-tab:hover {
+            background: var(--neutral-surface);
             color: var(--ink);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+            transform: translateY(-1px);
+        }
+
+        .nav-tab.active:hover {
+            background: var(--soft-surface-hover);
+            color: var(--accent);
+        }
+
+        [data-theme="light"] .nav-tab.active {
+            background: #e1eaff;
+            border-color: var(--accent);
+            color: #2458bd;
+            box-shadow: 0 5px 14px rgba(62, 115, 223, .2), inset 0 -3px 0 #2458bd;
         }
 
         .screen {
@@ -356,7 +509,7 @@
         }
 
         .stat {
-            background: linear-gradient(145deg, rgba(25, 33, 61, .96), rgba(18, 24, 47, .96));
+            background: var(--panel-gradient);
             border: 1px solid var(--line);
             border-radius: 14px;
             overflow: hidden;
@@ -387,7 +540,7 @@
         }
 
         .progress {
-            background: #2a3850;
+            background: var(--progress-track);
             border-radius: 99px;
             height: 5px;
             margin-top: 12px;
@@ -423,7 +576,7 @@
         }
 
         .panel {
-            background: linear-gradient(145deg, rgba(25, 33, 61, .96), rgba(18, 24, 47, .96));
+            background: var(--panel-gradient);
             border: 1px solid var(--line);
             border-radius: 16px;
             padding: 18px 18px 16px;
@@ -477,7 +630,7 @@
         }
 
         .bar {
-            background: rgba(255, 255, 255, .04);
+            background: var(--neutral-surface);
             border-radius: 999px;
             display: block;
             height: 8px;
@@ -504,7 +657,7 @@
 
         input,
         select {
-            background: #10172d;
+            background: var(--input-bg);
             border: 1px solid var(--line);
             border-radius: 9px;
             color: var(--ink);
@@ -588,7 +741,7 @@
         }
 
         .card {
-            background: linear-gradient(145deg, #1b2544, #141c35);
+            background: var(--card-gradient);
             border: none;
             border-radius: 14px;
             cursor: pointer;
@@ -675,7 +828,7 @@
 
         .card.has-card img.tcg-img {
             border-radius: inherit;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
+            box-shadow: none;
             height: 100%;
             width: 100%;
             object-fit: cover;
@@ -683,9 +836,9 @@
         }
 
         .card.not-caught {
-            background: linear-gradient(145deg, rgba(22, 30, 58, .75), rgba(15, 22, 44, .9));
-            filter: saturate(.45);
-            opacity: .72;
+            background: var(--missing-card-gradient);
+            filter: saturate(.4);
+            opacity: .76;
         }
 
         .card.not-caught:hover {
@@ -728,7 +881,7 @@
         }
 
         .status.missing {
-            background: rgba(255, 255, 255, .08);
+            background: var(--neutral-surface);
             color: var(--muted);
         }
 
@@ -745,7 +898,7 @@
 
         .card-visual img {
             display: block;
-            filter: drop-shadow(0 8px 8px rgba(0, 0, 0, .3));
+            filter: none;
             max-height: 100%;
             max-width: 100%;
             object-fit: contain;
@@ -759,8 +912,8 @@
         }
 
         .card.not-caught .card-visual img {
-            filter: grayscale(1) brightness(.34) contrast(1.15) drop-shadow(0 0 10px rgba(102, 136, 255, .24));
-            opacity: .82;
+            filter: grayscale(1) brightness(.28) contrast(1.18);
+            opacity: .88;
         }
 
         .grid-foil-layer {
@@ -898,7 +1051,7 @@
         }
 
         .setup-card {
-            background: linear-gradient(145deg, rgba(25, 33, 61, .98), rgba(18, 24, 47, .98));
+            background: var(--panel-gradient);
             border: 1px solid var(--line);
             border-radius: 22px;
             box-shadow: 0 24px 70px rgba(0, 0, 0, .28);
@@ -931,7 +1084,7 @@
             margin: 10px 0 10px;
         }
 
-        .setup-card > p {
+        .setup-card>p {
             color: var(--muted);
             line-height: 1.6;
             margin: 0 0 26px;
@@ -972,6 +1125,11 @@
             width: 100%;
         }
 
+        .setup-form .example-sheet-button,
+        .manager-add .example-sheet-button {
+            margin-top: -4px;
+        }
+
         .setup-status {
             color: var(--muted);
             font-size: 12px;
@@ -991,7 +1149,8 @@
 
         .sheet-modal-overlay {
             align-items: center;
-            background: rgba(6, 9, 20, .82);
+            background: rgba(6, 9, 20, .78);
+            backdrop-filter: blur(5px);
             display: flex;
             inset: 0;
             justify-content: center;
@@ -1003,20 +1162,35 @@
             z-index: 90;
         }
 
+        .sheet-modal-overlay[hidden] {
+            display: none;
+        }
+
+        .sr-only {
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+        }
+
         .sheet-modal-overlay.active {
             opacity: 1;
             pointer-events: auto;
         }
 
         .sheet-manager {
-            background: #171d35;
+            background: var(--panel-solid);
             border: 1px solid var(--line);
             border-radius: 18px;
             box-shadow: 0 24px 80px rgba(0, 0, 0, .42);
             max-height: min(720px, calc(100vh - 36px));
             max-width: 620px;
             overflow: auto;
-            padding: 26px;
+            padding: 24px;
             width: 100%;
         }
 
@@ -1036,7 +1210,43 @@
         .sheet-manager-head p {
             color: var(--muted);
             font-size: 12px;
+            line-height: 1.45;
             margin: 5px 0 0;
+        }
+
+        .sheet-add-head {
+            position: relative;
+            justify-content: center;
+        }
+
+        .sheet-add-head > div {
+            text-align: center;
+        }
+
+        .sheet-add-head .close-button {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .sheet-manager-section-head {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            margin: 0 0 9px;
+        }
+
+        .sheet-manager-section-head h3 {
+            color: var(--muted);
+            font-size: 11px;
+            letter-spacing: .08em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .sheet-manager-count {
+            color: var(--muted);
+            font-size: 11px;
         }
 
         .close-button {
@@ -1055,12 +1265,21 @@
         .sheet-list {
             display: grid;
             gap: 10px;
-            margin-bottom: 22px;
+            margin-bottom: 24px;
+        }
+
+        .sheet-list-empty {
+            border: 1px dashed var(--line);
+            border-radius: 12px;
+            color: var(--muted);
+            font-size: 12px;
+            padding: 18px;
+            text-align: center;
         }
 
         .sheet-list-item {
             align-items: center;
-            background: rgba(16, 23, 45, .72);
+            background: var(--input-bg);
             border: 1px solid var(--line);
             border-radius: 12px;
             display: flex;
@@ -1071,8 +1290,8 @@
         }
 
         .sheet-list-item.current {
-            background: rgba(112, 217, 210, .09);
-            border-color: rgba(112, 217, 210, .5);
+            background: var(--cyan-surface);
+            border-color: var(--cyan);
             box-shadow: inset 3px 0 var(--cyan);
         }
 
@@ -1082,10 +1301,16 @@
             transform: translateY(-1px);
         }
 
+        .sheet-list-item.current:hover {
+            background: var(--cyan-surface);
+            border-color: var(--cyan);
+            transform: none;
+        }
+
         .sheet-list-copy {
-            align-items: center;
-            display: flex;
-            gap: 9px;
+            align-items: flex-start;
+            display: grid;
+            gap: 4px;
             min-width: 0;
         }
 
@@ -1111,21 +1336,28 @@
             text-transform: uppercase;
         }
 
+        .sheet-list-meta {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
         .sheet-list-actions {
             display: flex;
             flex-shrink: 0;
+            flex-wrap: wrap;
             gap: 6px;
         }
 
         .sheet-list-actions button {
-            background: transparent;
+            background: var(--neutral-surface);
             border: 1px solid var(--line);
             border-radius: 8px;
-            color: var(--muted);
+            color: var(--ink);
             cursor: pointer;
             font: 600 11px 'DM Sans';
             min-height: 32px;
             padding: 5px 9px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06);
         }
 
         .sheet-list-actions button:hover {
@@ -1133,10 +1365,31 @@
             color: var(--ink);
         }
 
+        .sheet-list-actions button:focus-visible,
+        .close-button:focus-visible {
+            border-color: var(--cyan);
+            outline: 2px solid color-mix(in srgb, var(--cyan) 45%, transparent);
+            outline-offset: 2px;
+        }
+
         .sheet-list-actions button[data-action="select"] {
-            background: rgba(112, 217, 210, .12);
-            border-color: rgba(112, 217, 210, .35);
+            background: var(--cyan-surface);
+            border-color: var(--cyan);
             color: var(--cyan);
+        }
+
+        .sheet-list-actions button[data-action="select"]:disabled {
+            background: transparent;
+            border-color: var(--line);
+            color: var(--muted);
+            cursor: default;
+            opacity: .8;
+        }
+
+        .close-button {
+            background: var(--neutral-surface);
+            color: var(--ink);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06);
         }
 
         .manager-add {
@@ -1144,9 +1397,69 @@
             padding-top: 20px;
         }
 
+        .manager-add > h3, .manager-add > p, .manager-add > form { display: none; }
+
+        .manager-add-trigger {
+            align-items: center;
+            background: var(--soft-surface);
+            border: 1px dashed color-mix(in srgb, var(--accent) 65%, var(--line));
+            border-radius: 11px;
+            color: var(--accent);
+            cursor: pointer;
+            display: flex;
+            font: 700 13px 'DM Sans';
+            gap: 8px;
+            justify-content: center;
+            min-height: 44px;
+            padding: 9px 14px;
+            transition: background .2s ease, border-color .2s ease, transform .2s ease;
+            width: 100%;
+        }
+
+        .manager-add-trigger:hover,
+        .manager-add-trigger:focus-visible {
+            background: var(--soft-surface-hover);
+            border-color: var(--accent);
+            outline: none;
+            transform: translateY(-1px);
+        }
+
+        .manager-add-trigger svg { height: 18px; width: 18px; }
+
+        .sheet-help-button {
+            align-items: center;
+            background: var(--neutral-surface);
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            color: var(--ink);
+            cursor: pointer;
+            display: inline-flex;
+            font: 700 14px 'DM Sans';
+            height: 30px;
+            justify-content: center;
+            width: 30px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06);
+        }
+
+        .sheet-help-button:hover,
+        .sheet-help-button:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
+
+        .sheet-help-copy { color: var(--muted); font-size: 13px; line-height: 1.6; }
+        .sheet-help-copy p { margin: 0 0 12px; }
+        .sheet-help-copy p:last-child { margin-bottom: 0; }
+
+        #sheetAddModal, #sheetHelpModal { z-index: 100; }
+
         .manager-add h3 {
             font: 700 14px 'Space Grotesk';
             margin: 0 0 12px;
+        }
+
+        .manager-add p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.45;
+            margin: -4px 0 14px;
         }
 
         .manager-add .setup-button {
@@ -1182,10 +1495,49 @@
             transform: translate(-50%, 0);
         }
 
+        [data-theme="light"] .app-toast {
+            background: #ffffff;
+            border-color: rgba(8, 127, 136, .35);
+            box-shadow: 0 12px 30px rgba(32, 53, 82, .2);
+        }
+
+        [data-theme="light"] .sheet-list-item {
+            background: rgba(255, 255, 255, .72);
+        }
+
+        [data-theme="light"] .bar {
+            background: #e2eaf3;
+        }
+
+        [data-theme="light"] .close-button {
+            background: rgba(23, 35, 58, .06);
+        }
+
+        [data-theme="pokedex"] .panel,
+        [data-theme="pokedex"] .toolbar,
+        [data-theme="pokedex"] .setup-card,
+        [data-theme="pokedex"] .sheet-manager {
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08), 0 16px 34px rgba(3, 8, 20, .28);
+        }
+
+        [data-theme="pokedex"] .card {
+            border: 1px solid rgba(158, 179, 219, .2);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 10px 25px rgba(3, 8, 20, .28);
+        }
+
+        [data-theme="pokedex"] .section-nav {
+            background: rgba(15, 24, 43, .9);
+            border-color: rgba(227, 53, 13, .55);
+        }
+
+        [data-theme="pokedex"] h1 {
+            text-shadow: 0 4px 18px rgba(3, 8, 20, .35);
+        }
+
         /* --- MODAL POKÉMON POCKET (OTIMIZADA MOBILE) --- */
         .modal-overlay {
             align-items: center;
-            background: rgba(6, 9, 20, .92);
+            background: var(--modal-overlay);
             display: flex;
             inset: 0;
             justify-content: center;
@@ -1235,7 +1587,7 @@
             position: relative;
             transform-style: preserve-3d;
             will-change: transform;
-            background: #141c35;
+            background: var(--modal-card-bg);
             overflow: hidden;
             touch-action: none;
             transition: none;
@@ -1257,6 +1609,11 @@
             pointer-events: none;
         }
 
+        .modal-card-3d.not-caught .modal-card-img {
+            filter: grayscale(1) brightness(.28) contrast(1.18);
+            opacity: .88;
+        }
+
         .modal-card-sprite {
             align-items: center;
             display: flex;
@@ -1264,14 +1621,14 @@
             height: 100%;
             justify-content: center;
             padding: 20px;
-            background: radial-gradient(circle at center, #232e54 0%, #10172d 100%);
+            background: var(--sprite-gradient);
         }
 
         .modal-card-sprite img {
             max-height: 92%;
             max-width: 96%;
             object-fit: contain;
-            filter: drop-shadow(0 15px 15px rgba(0, 0, 0, .5));
+            filter: none;
             transform: none;
         }
 
@@ -1281,7 +1638,7 @@
         }
 
         .modal-card-sprite.silhouetted img {
-            filter: brightness(0.55) contrast(1.1) drop-shadow(0 0 12px rgba(102, 136, 255, 0.4));
+            filter: brightness(0.55) contrast(1.1);
             opacity: 0.95;
         }
 
@@ -1376,6 +1733,14 @@
                 flex-direction: column;
                 gap: 14px;
                 margin-bottom: 22px;
+                min-height: 0;
+            }
+
+            .brand-lockup {
+                max-width: 100%;
+                position: static;
+                transform: none;
+                width: 100%;
             }
 
             .brand-kicker {
@@ -1414,10 +1779,6 @@
             .share-button {
                 flex-basis: 44px;
                 min-width: 44px;
-            }
-
-            .section-nav {
-                width: 100%;
             }
 
             .stats {
@@ -1482,27 +1843,59 @@
             .modal-card-sprite img {
                 filter: drop-shadow(0 8px 8px rgba(0, 0, 0, .42));
             }
+
+            .sheet-manager {
+                border-radius: 16px;
+                max-height: calc(100vh - 24px);
+                padding: 18px;
+            }
+
+            .sheet-list-item {
+                align-items: stretch;
+                flex-direction: column;
+                gap: 12px;
+                padding: 13px;
+            }
+
+            .sheet-list-actions {
+                width: 100%;
+            }
+
+            .sheet-list-actions button {
+                flex: 1;
+            }
         }
     </style>
+    <script>
+        (() => {
+            try {
+                const savedTheme = localStorage.getItem('dexviewer-theme');
+                if (['dark', 'light'].includes(savedTheme)) document.documentElement.dataset.theme = savedTheme;
+            } catch (error) { }
+        })();
+    </script>
 </head>
 
 <body>
     <main class="shell">
         <header class="topbar">
             <div class="brand-lockup">
-                <p class="brand-kicker">DexViewer</p>
                 <h1>Pokédex</h1>
                 <p class="brand-subtitle">Sua coleção, sempre sincronizada com a planilha.</p>
             </div>
             <div class="sheet-header-actions" id="sheetHeaderActions" hidden>
                 <div class="sheet-action-group">
-                    <button class="selected-sheet" type="button" onclick="openSheetManager()" aria-label="Trocar coleção" aria-haspopup="dialog">
+                    <button class="selected-sheet" type="button" onclick="openSheetManager()"
+                        aria-label="Trocar coleção" aria-haspopup="dialog">
                         <span class="selected-sheet-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
-                                <path d="M7.5 3.5h8.2l2.8 2.8v14.2H5.5V5.5a2 2 0 0 1 2-2Z"></path>
-                                <path d="M15.7 3.5v3h2.8M8.5 9.2h7M8.5 12h4.4"></path>
-                                <circle cx="15.8" cy="16.8" r="1.4"></circle>
-                                <path d="M8.5 16.8h3"></path>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="1.7">
+                                <path
+                                    d="M7.2 3.5h8.6a2 2 0 0 1 2 2v3.1l1.2 1.2v8.7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-8.7l1.2-1.2V5.5a2 2 0 0 1 2-2Z">
+                                </path>
+                                <rect x="8" y="6" width="8" height="5.2" rx="1"></rect>
+                                <path d="M8.2 14.3h7.6M8.2 17.1h3.5"></path>
+                                <circle cx="16.1" cy="17.1" r=".9" fill="currentColor" stroke="none"></circle>
                             </svg>
                         </span>
                         <span class="selected-sheet-copy">
@@ -1510,9 +1903,12 @@
                             <strong class="selected-sheet-name" id="selectedSheetName">--</strong>
                         </span>
                     </button>
-                    <button class="header-button share-button" type="button" onclick="shareCurrentSheet()" title="Copiar link compartilhável" aria-label="Compartilhar coleção">
+                    <button class="header-button share-button" type="button" onclick="shareCurrentSheet()"
+                        title="Copiar link compartilhável" aria-label="Compartilhar coleção">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle>
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
                             <path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"></path>
                         </svg>
                     </button>
@@ -1524,21 +1920,31 @@
             <div class="setup-card">
                 <span class="setup-eyebrow">Primeiro acesso</span>
                 <h2 id="setupTitle">Conecte sua Pokédex</h2>
-                <p>Cole o link de compartilhamento da sua planilha do Google Sheets. Nós identificamos a planilha e preparamos o CSV automaticamente.</p>
+                <p>Cole o link de compartilhamento da sua planilha do Google Sheets. Nós identificamos a planilha e
+                    preparamos o CSV automaticamente.</p>
                 <form class="setup-form" onsubmit="registerSheet(event)">
                     <div class="setup-field">
                         <label for="setupSheetName">Nome da Pokédex</label>
-                        <input id="setupSheetName" name="sheetName" type="text" placeholder="Ex.: Coleção principal" maxlength="60" required>
+                        <input id="setupSheetName" name="sheetName" type="text" placeholder="Ex.: Coleção principal"
+                            maxlength="60" required>
                     </div>
                     <div class="setup-field">
                         <label for="setupSheetUrl">Link ou ID da planilha</label>
-                        <input id="setupSheetUrl" name="sheetUrl" type="text" placeholder="https://docs.google.com/spreadsheets/d/..." autocomplete="url" required>
-                        <span class="field-hint">Antes, deixe o acesso como “qualquer pessoa com o link” e permissão de leitor.</span>
+                        <input id="setupSheetUrl" name="sheetUrl" type="text"
+                            placeholder="https://docs.google.com/spreadsheets/d/..." autocomplete="url" required>
+                        <span class="field-hint">Antes, deixe o acesso como “qualquer pessoa com o link” e permissão de
+                            leitor.</span>
                     </div>
                     <button class="setup-button" type="submit">Adicionar e abrir Pokédex</button>
+                    <a class="example-sheet-button"
+                        href="https://docs.google.com/spreadsheets/d/1m4JDj-9ewalOs2OaaVzbQWtle72Qc2ciXkZ3yyL-BII/edit?gid=0#gid=0"
+                        target="_blank" rel="noopener noreferrer">Abrir planilha de coleção exemplo ↗</a>
                     <p class="setup-status" id="setupStatus" aria-live="polite"></p>
                 </form>
-                <p class="setup-note">A planilha fica salva somente neste navegador. Você poderá cadastrar várias e trocar entre elas pelo botão no cabeçalho.<br><br>Opcional: use uma coluna chamada <strong>collection</strong> para organizar os Pokémon por região, coleção ou qualquer outro grupo.</p>
+                <p class="setup-note">A planilha fica salva somente neste navegador. Você poderá cadastrar várias e
+                    trocar entre elas pelo botão no cabeçalho.<br><br>Opcional: use uma coluna chamada
+                    <strong>collection</strong> para organizar os Pokémon por região, coleção ou qualquer outro grupo.
+                </p>
             </div>
         </section>
 
@@ -1550,7 +1956,8 @@
                         <circle cx="11" cy="11" r="7"></circle>
                         <path d="m20 20-4-4"></path>
                     </svg>
-                    <input id="search" type="search" placeholder="Buscar por nome ou número..." oninput="filterGrid()">
+                    <input id="search" type="search" placeholder="Buscar por nome ou número..."
+                        oninput="filterGrid(true)">
                 </label>
                 <select id="collectionFilter" aria-label="Filtrar por coleção ou grupo" onchange="filterGrid()">
                     <option value="ALL">Todas as coleções</option>
@@ -1592,6 +1999,13 @@
         <section class="screen" id="configScreen" aria-label="Configurações" hidden>
             <div class="panel config-panel">
                 <div class="config-row">
+                    <label for="themeStyle">Tema da Pokédex</label>
+                    <select class="art-select" id="themeStyle" aria-label="Tema da Pokédex" onchange="changeTheme()">
+                        <option value="dark">Dark</option>
+                        <option value="light">Light</option>
+                    </select>
+                </div>
+                <div class="config-row">
                     <label for="artStyle">Estilo da arte (Fallback)</label>
                     <select class="art-select" id="artStyle" aria-label="Estilo de arte" onchange="changeArtStyle()">
                         <option value="pixel" selected>Pixel art</option>
@@ -1618,30 +2032,77 @@
         </section>
     </main>
 
-    <div class="sheet-modal-overlay" id="sheetManagerModal" onclick="closeSheetManager(event)">
-        <section class="sheet-manager" role="dialog" aria-modal="true" aria-labelledby="sheetManagerTitle" onclick="event.stopPropagation()">
+    <div class="sheet-modal-overlay" id="sheetManagerModal" onclick="closeSheetManager(event)" hidden>
+        <section class="sheet-manager" role="dialog" aria-modal="true" aria-labelledby="sheetManagerTitle"
+            aria-describedby="sheetManagerDescription" tabindex="-1" onclick="event.stopPropagation()">
+            <span id="sheetManagerDescription" class="sr-only">Escolha uma coleção salva ou cadastre outra.</span>
             <div class="sheet-manager-head">
+                <button class="sheet-help-button" type="button" onclick="openSheetHelp()" aria-label="Como funciona?">?</button>
                 <div>
                     <h2 id="sheetManagerTitle">Suas Pokédex</h2>
                     <p>Escolha uma coleção salva ou cadastre outra.</p>
                 </div>
                 <button class="close-button" type="button" onclick="closeSheetManager()" aria-label="Fechar">×</button>
             </div>
+            <div class="sheet-manager-section-head">
+                <h3>Coleções salvas</h3>
+                <span class="sheet-manager-count" id="sheetManagerCount"></span>
+            </div>
             <div class="sheet-list" id="sheetList"></div>
             <div class="manager-add">
+                <button class="manager-add-trigger" type="button" onclick="openSheetAddModal()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+                    <span>Adicionar nova planilha</span>
+                </button>
                 <h3>Adicionar nova planilha</h3>
+                <p>Use um nome curto para encontrar sua coleção com facilidade depois.</p>
                 <form class="sheet-form" onsubmit="registerSheet(event)">
                     <div class="setup-field">
-                        <label for="managerSheetName">Nome da Pokédex</label>
-                        <input id="managerSheetName" name="sheetName" type="text" placeholder="Ex.: Cartas para trocar" maxlength="60" required>
+                        <label for="legacyManagerSheetName">Nome da Pokédex</label>
+                        <input id="legacyManagerSheetName" name="sheetName" type="text" placeholder="Ex.: Cartas para trocar"
+                            maxlength="60" required>
                     </div>
                     <div class="setup-field">
-                        <label for="managerSheetUrl">Link ou ID da planilha</label>
-                        <input id="managerSheetUrl" name="sheetUrl" type="text" placeholder="Cole o link do Google Sheets" required>
+                        <label for="legacyManagerSheetUrl">Link ou ID da planilha</label>
+                        <input id="legacyManagerSheetUrl" name="sheetUrl" type="text"
+                            placeholder="Cole o link do Google Sheets" required>
                     </div>
                     <button class="setup-button" type="submit">Salvar planilha</button>
-                    <p class="setup-status" id="managerStatus" aria-live="polite"></p>
+                    <a class="example-sheet-button"
+                        href="https://docs.google.com/spreadsheets/d/1m4JDj-9ewalOs2OaaVzbQWtle72Qc2ciXkZ3yyL-BII/edit?gid=0#gid=0"
+                        target="_blank" rel="noopener noreferrer">Abrir planilha de coleção exemplo ↗</a>
+                    <p class="setup-status" id="legacyManagerStatus" aria-live="polite"></p>
                 </form>
+            </div>
+        </section>
+    </div>
+
+    <div class="sheet-modal-overlay" id="sheetAddModal" onclick="closeSheetAddModal(event)" hidden>
+        <section class="sheet-manager" role="dialog" aria-modal="true" aria-labelledby="sheetAddTitle" tabindex="-1" onclick="event.stopPropagation()">
+            <div class="sheet-manager-head sheet-add-head">
+                <div><h2 id="sheetAddTitle">Nova planilha</h2><p>Cadastre outra coleção para alternar entre elas.</p></div>
+                <button class="close-button" type="button" onclick="closeSheetAddModal()" aria-label="Fechar">×</button>
+            </div>
+            <form class="sheet-form" onsubmit="registerSheet(event)">
+                <div class="setup-field"><label for="managerSheetName">Nome da Pokédex</label><input id="managerSheetName" name="sheetName" type="text" placeholder="Ex.: Cartas para trocar" maxlength="60" required></div>
+                <div class="setup-field"><label for="managerSheetUrl">Link ou ID da planilha</label><input id="managerSheetUrl" name="sheetUrl" type="text" placeholder="Cole o link do Google Sheets" required></div>
+                <button class="setup-button" type="submit">Salvar planilha</button>
+                <a class="example-sheet-button" href="https://docs.google.com/spreadsheets/d/1m4JDj-9ewalOs2OaaVzbQWtle72Qc2ciXkZ3yyL-BII/edit?gid=0#gid=0" target="_blank" rel="noopener noreferrer">Abrir planilha de coleção exemplo ↗</a>
+                <p class="setup-status" id="managerStatus" aria-live="polite"></p>
+            </form>
+        </section>
+    </div>
+
+    <div class="sheet-modal-overlay" id="sheetHelpModal" onclick="closeSheetHelp(event)" hidden>
+        <section class="sheet-manager" role="dialog" aria-modal="true" aria-labelledby="sheetHelpTitle" tabindex="-1" onclick="event.stopPropagation()">
+            <div class="sheet-manager-head">
+                <div><h2 id="sheetHelpTitle">Como funcionam as planilhas?</h2></div>
+                <button class="close-button" type="button" onclick="closeSheetHelp()" aria-label="Fechar">×</button>
+            </div>
+            <div class="sheet-help-copy">
+                <p>Cadastre várias planilhas do Google Sheets e escolha qual coleção quer acompanhar. A selecionada monta sua Pokédex e fica salva apenas neste navegador.</p>
+                <p>A planilha exemplo mostra o formato esperado das colunas e alguns dados preenchidos. Use-a como modelo ou abra uma cópia para começar.</p>
+                <a class="example-sheet-button" href="https://docs.google.com/spreadsheets/d/1m4JDj-9ewalOs2OaaVzbQWtle72Qc2ciXkZ3yyL-BII/edit?gid=0#gid=0" target="_blank" rel="noopener noreferrer">Abrir planilha de coleção exemplo ↗</a>
             </div>
         </section>
     </div>
@@ -1694,14 +2155,19 @@
         const ACTIVE_SHEET_KEY = 'dexviewer-active-sheet-v2';
         const API_CACHE_KEY = 'dexviewer-pokeapi-v1';
         const ART_STYLE_KEY = 'dexviewer-art-style';
+        const THEME_KEY = 'dexviewer-theme';
         const CACHE_TTL = 7 * 24 * 60 * 60 * 1000;
         const IMAGE_CACHE_NAME = 'dex-img-cache-v1';
 
         let pokemonData = [];
         let apiData = {};
         let artStyle = localStorage.getItem(ART_STYLE_KEY) || 'pixel';
+        let appTheme = ['dark', 'light'].includes(localStorage.getItem(THEME_KEY))
+            ? localStorage.getItem(THEME_KEY)
+            : 'dark';
         let sheets = [];
         let activeSheet = null;
+        let sheetManagerReturnFocus = null;
         let sheetLoadVersion = 0;
         let isCurrentCardCaught = false;
         let foilObserver = null;
@@ -1913,7 +2379,7 @@
             const form = event.currentTarget;
             const name = String(form.elements.sheetName.value || '').trim();
             const reference = parseSheetReference(form.elements.sheetUrl.value);
-            const statusId = form.closest('#sheetManagerModal') ? 'managerStatus' : 'setupStatus';
+            const statusId = form.closest('#sheetAddModal, #sheetManagerModal') ? 'managerStatus' : 'setupStatus';
 
             if (!reference) {
                 setSetupStatus('Não consegui identificar a planilha. Cole um link do Google Sheets ou o ID completo.', true, statusId);
@@ -1928,6 +2394,7 @@
             await activateSheet(nextSheet);
             form.reset();
             setSetupStatus('', false, statusId);
+            closeSheetAddModal();
             closeSheetManager();
         }
 
@@ -1968,36 +2435,102 @@
             });
         }
 
+        function renameSheet(sheet) {
+            const nextName = window.prompt('Digite o novo nome da planilha:', sheet.name);
+            if (nextName === null) return;
+
+            const name = nextName.trim();
+            if (!name) {
+                showToast('O nome da planilha não pode ficar vazio.');
+                return;
+            }
+
+            sheet.name = name;
+            if (activeSheet?.key === sheet.key) activeSheet.name = name;
+            saveSheets();
+            updateHeaderSheet();
+            renderSheetList();
+            showToast('Planilha renomeada.');
+        }
+
         function renderSheetList() {
             const list = document.getElementById('sheetList');
+            const count = document.getElementById('sheetManagerCount');
             list.innerHTML = '';
+            count.textContent = `${sheets.length} ${sheets.length === 1 ? 'coleção' : 'coleções'}`;
+            if (!sheets.length) {
+                list.innerHTML = '<div class="sheet-list-empty">Nenhuma coleção salva ainda.</div>';
+                return;
+            }
+
             sheets.forEach(sheet => {
+                const isCurrent = activeSheet?.key === sheet.key;
                 const item = document.createElement('div');
-                item.className = `sheet-list-item${activeSheet?.key === sheet.key ? ' current' : ''}`;
+                item.className = `sheet-list-item${isCurrent ? ' current' : ''}`;
                 item.innerHTML = `
                     <div class="sheet-list-copy">
                         <span class="sheet-list-name">${escapeHtml(sheet.name)}</span>
-                        ${activeSheet?.key === sheet.key ? '<span class="sheet-list-current">Atual</span>' : ''}
+                        <span class="sheet-list-meta">${isCurrent ? 'Coleção em uso' : 'Coleção salva'}</span>
                     </div>
                     <div class="sheet-list-actions">
-                        <button type="button" data-action="select" data-sheet-key="${escapeHtml(sheet.key)}" onclick="loadSheetFromButton(this)">Carregar</button>
+                        <button type="button" data-action="select" data-sheet-key="${escapeHtml(sheet.key)}" ${isCurrent ? 'disabled' : ''}>${isCurrent ? 'Em uso' : 'Abrir'}</button>
+                        <button type="button" data-action="rename">Renomear</button>
                         <button type="button" data-action="share">Compartilhar</button>
                     </div>`;
                 const selectButton = item.querySelector('[data-action="select"]');
-                selectButton.addEventListener('click', () => loadSheetFromButton(selectButton));
+                if (!isCurrent) selectButton.addEventListener('click', () => loadSheetFromButton(selectButton));
+                item.querySelector('[data-action="rename"]').addEventListener('click', () => renameSheet(sheet));
                 item.querySelector('[data-action="share"]').addEventListener('click', () => shareSheet(sheet));
                 list.appendChild(item);
             });
         }
 
         function openSheetManager() {
+            sheetManagerReturnFocus = document.activeElement;
             renderSheetList();
-            document.getElementById('sheetManagerModal').classList.add('active');
+            const modal = document.getElementById('sheetManagerModal');
+            modal.hidden = false;
+            modal.classList.add('active');
+            requestAnimationFrame(() => modal.querySelector('.close-button')?.focus());
+        }
+
+        function openSheetAddModal() {
+            const modal = document.getElementById('sheetAddModal');
+            modal.hidden = false;
+            modal.classList.add('active');
+            requestAnimationFrame(() => modal.querySelector('input')?.focus());
+        }
+
+        function closeSheetAddModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            const modal = document.getElementById('sheetAddModal');
+            if (!modal) return;
+            modal.classList.remove('active');
+            modal.hidden = true;
+        }
+
+        function openSheetHelp() {
+            const modal = document.getElementById('sheetHelpModal');
+            modal.hidden = false;
+            modal.classList.add('active');
+            requestAnimationFrame(() => modal.querySelector('.close-button')?.focus());
+        }
+
+        function closeSheetHelp(event) {
+            if (event && event.target !== event.currentTarget) return;
+            const modal = document.getElementById('sheetHelpModal');
+            if (!modal) return;
+            modal.classList.remove('active');
+            modal.hidden = true;
         }
 
         function closeSheetManager(event) {
             if (event && event.target !== event.currentTarget) return;
-            document.getElementById('sheetManagerModal').classList.remove('active');
+            const modal = document.getElementById('sheetManagerModal');
+            modal.classList.remove('active');
+            modal.hidden = true;
+            sheetManagerReturnFocus?.focus?.();
+            sheetManagerReturnFocus = null;
         }
 
         function getShareUrl(sheet) {
@@ -2095,8 +2628,9 @@
                 // Verifica a coluna 'caught'/'capturado' na planilha
                 const isCaughtFromCol = caughtCol >= 0 ? parseBoolean(cols[caughtCol]) : false;
 
-                // Considera capturado se 'caught = true' OU se possuir URL de carta
-                const caught = isCaughtFromCol || !!cardUrl;
+                // Com a coluna caught, ela é a fonte de verdade. Assim uma carta
+                // referenciada ainda pode aparecer escurecida como faltante.
+                const caught = caughtCol >= 0 ? isCaughtFromCol : !!cardUrl;
 
                 return {
                     id,
@@ -2178,6 +2712,25 @@
 
         function render() { populateCollections(); updateStats(); filterGrid(); }
 
+        function applyTheme(theme, persist = true) {
+            const validThemes = ['dark', 'light'];
+            appTheme = validThemes.includes(theme) ? theme : 'dark';
+            document.documentElement.dataset.theme = appTheme;
+            document.querySelector('meta[name="theme-color"]')?.setAttribute('content', {
+                dark: '#0c1124',
+                light: '#edf3f8'
+            }[appTheme]);
+            const themeSelect = document.getElementById('themeStyle');
+            if (themeSelect) themeSelect.value = appTheme;
+            if (persist) localStorage.setItem(THEME_KEY, appTheme);
+        }
+
+        function changeTheme() {
+            applyTheme(document.getElementById('themeStyle').value);
+            const labels = { dark: 'Dark', light: 'Light' };
+            showToast(`Tema ${labels[appTheme]} ativado.`);
+        }
+
         function getPokemonImage(extra, style, id) {
             const official = extra?.sprites?.official || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
             const url = style === 'pixel' ? (extra?.sprites?.pixel || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`) : (extra?.sprites?.[style] || official);
@@ -2190,7 +2743,15 @@
             filterGrid();
         }
 
-        function filterGrid() {
+        let filterGridTimer = 0;
+
+        function filterGrid(debounced = false) {
+            if (debounced) {
+                window.clearTimeout(filterGridTimer);
+                filterGridTimer = window.setTimeout(() => filterGrid(false), 90);
+                return;
+            }
+
             const search = document.getElementById('search').value.toLowerCase().trim();
             const collection = document.getElementById('collectionFilter').value;
             const status = document.getElementById('statusFilter').value;
@@ -2333,7 +2894,7 @@
                         const displayName = formatPokemonName(extra.name || p.name);
                         const card = document.createElement('article');
 
-                        const hasCard = p.caught && p.cardUrl;
+                        const hasCard = !!p.cardUrl;
                         const foilLayer = p.caught && p.foil ? '<span class="grid-foil-layer" aria-hidden="true"></span>' : '';
                         const foilCorner = p.caught && p.foil ? '<span class="foil-corner" aria-label="Carta foil">★ FOIL</span>' : '';
 
@@ -2489,25 +3050,24 @@
             const isFoil = pokemon.caught && pokemon.foil;
 
             modalCard3D.classList.toggle('is-caught', pokemon.caught);
+            modalCard3D.classList.toggle('not-caught', !pokemon.caught);
             modalCard3D.classList.toggle('is-foil', isFoil);
-            modalCard3D.classList.toggle('has-tcg', pokemon.caught && !!pokemon.cardUrl);
+            modalCard3D.classList.toggle('has-tcg', !!pokemon.cardUrl);
             modalFoilLayer.style.opacity = isFoil ? '' : '0';
             modalCard3D.style.setProperty('--modal-foil-x', '50%');
             modalCard3D.style.setProperty('--modal-foil-y', '50%');
             modalCard3D.style.setProperty('--modal-sheen-x', '50%');
             modalCard3D.style.setProperty('--modal-sheen-opacity', '.62');
 
-            if (pokemon.caught) {
-                if (pokemon.cardUrl) {
-                    const fallbackCardImage = getPokemonImage(extra, artStyle, pokemon.id);
-                    modalCardBody.innerHTML = `<img class="modal-card-img" src="${pokemon.cardUrl}" alt="${displayName}" onerror="this.onerror=null; this.src='${fallbackCardImage}';">`;
-                } else {
-                    modalCardBody.innerHTML = `
+            if (pokemon.cardUrl) {
+                const fallbackCardImage = getPokemonImage(extra, artStyle, pokemon.id);
+                modalCardBody.innerHTML = `<img class="modal-card-img" src="${pokemon.cardUrl}" alt="${displayName}" onerror="this.onerror=null; this.src='${fallbackCardImage}';">`;
+            } else if (pokemon.caught) {
+                modalCardBody.innerHTML = `
                         <div class="modal-card-sprite">
                             <img class="${artStyle === 'pixel' ? 'pixel-art' : ''}" src="${getPokemonImage(extra, artStyle, pokemon.id)}" alt="${displayName}">
                         </div>
                     `;
-                }
             } else {
                 modalCardBody.innerHTML = `
                     <div class="modal-card-sprite silhouetted">
@@ -2524,6 +3084,7 @@
         }
 
         function closeModal(e) {
+            if (e && modalCard3D.contains(e.target)) return;
             modal.classList.remove('active');
             modalCard3D.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
             modalFoilLayer.style.opacity = '0';
@@ -2609,6 +3170,15 @@
         modalCard3D.addEventListener('pointercancel', resetModalCard);
         modal.addEventListener('pointerleave', resetModalCard);
 
+        window.addEventListener('keydown', (event) => {
+            if (event.key !== 'Escape') return;
+            if (!document.getElementById('sheetHelpModal').hidden) closeSheetHelp();
+            else if (!document.getElementById('sheetAddModal').hidden) closeSheetAddModal();
+            else if (!document.getElementById('sheetManagerModal').hidden) closeSheetManager();
+        });
+
+        applyTheme(appTheme, false);
+        document.getElementById('themeStyle').value = appTheme;
         document.getElementById('artStyle').value = artStyle;
         initializeSheets();
 

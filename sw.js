@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dexviewer-shell-v4';
+const CACHE_NAME = 'dexviewer-shell-v5';
 const APP_SHELL = [
     './',
     './index.html',
