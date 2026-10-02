@@ -66,10 +66,156 @@
         .topbar {
             align-items: center;
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            justify-content: space-between;
+            gap: 24px;
             margin-bottom: 18px;
-            text-align: center;
+            text-align: left;
+        }
+
+        .brand-lockup {
+            min-width: 0;
+        }
+
+        .brand-kicker {
+            color: var(--cyan);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .14em;
+            margin: 0 0 8px;
+            text-transform: uppercase;
+        }
+
+        .brand-subtitle {
+            color: var(--muted);
+            font-size: 13px;
+            margin: 0;
+        }
+
+        .sheet-header-actions {
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            justify-content: flex-end;
+        }
+
+        .sheet-action-group {
+            align-items: center;
+            display: flex;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .selected-sheet {
+            align-items: center;
+            background: rgba(112, 217, 210, .08);
+            border: 1px solid rgba(112, 217, 210, .24);
+            border-radius: 12px;
+            color: var(--ink);
+            cursor: pointer;
+            display: flex;
+            font: inherit;
+            gap: 10px;
+            max-width: 260px;
+            min-height: 42px;
+            padding: 7px 12px;
+            text-align: left;
+            transition: background .2s ease, border-color .2s ease, transform .2s ease;
+        }
+
+        .selected-sheet:hover,
+        .selected-sheet:focus-visible {
+            background: rgba(112, 217, 210, .15);
+            border-color: var(--cyan);
+            outline: none;
+            transform: translateY(-1px);
+        }
+
+        .selected-sheet-icon {
+            align-items: center;
+            background: rgba(112, 217, 210, .14);
+            border-radius: 8px;
+            color: var(--cyan);
+            display: flex;
+            flex: 0 0 28px;
+            height: 28px;
+            justify-content: center;
+            width: 28px;
+        }
+
+        .selected-sheet-icon svg {
+            height: 19px;
+            width: 19px;
+        }
+
+        .selected-sheet-copy {
+            display: grid;
+            min-width: 0;
+        }
+
+        .selected-sheet-label {
+            color: var(--muted);
+            font-size: 10px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .selected-sheet-name {
+            font-size: 13px;
+            font-weight: 700;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .header-button,
+        .setup-button,
+        .modal-button {
+            align-items: center;
+            background: linear-gradient(135deg, var(--accent), var(--indigo));
+            border: 0;
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            display: inline-flex;
+            font: 700 12px 'DM Sans', sans-serif;
+            gap: 7px;
+            justify-content: center;
+            min-height: 42px;
+            padding: 9px 14px;
+            transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+        }
+
+        .header-button:hover,
+        .setup-button:hover,
+        .modal-button:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 136, 255, .25);
+        }
+
+        .header-button.secondary,
+        .modal-button.secondary {
+            background: rgba(102, 136, 255, .1);
+            border: 1px solid var(--line);
+            color: var(--ink);
+        }
+
+        .header-button svg,
+        .modal-button svg {
+            height: 16px;
+            width: 16px;
+        }
+
+        .share-button {
+            flex: 0 0 42px;
+            min-width: 42px;
+            padding: 9px;
+        }
+
+        .share-button svg {
+            height: 18px;
+            width: 18px;
         }
 
         .art-select {
@@ -143,19 +289,20 @@
 
         .section-nav {
             background: rgba(18, 24, 47, .96);
-            border: 1px solid var(--line);
-            border-radius: 18px;
-            bottom: 12px;
-            box-shadow: 0 -10px 30px rgba(0, 0, 0, .2);
+            border-top: 1px solid var(--line);
+            border-radius: 0;
+            bottom: 0;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, .24);
             display: grid;
             gap: 8px;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            left: 50%;
-            max-width: 520px;
-            padding: 8px;
+            left: 0;
+            max-width: none;
+            padding: 8px max(8px, calc((100% - 520px) / 2));
             position: fixed;
-            transform: translateX(-50%);
-            width: calc(100% - 24px);
+            right: 0;
+            transform: none;
+            width: 100%;
             z-index: 40;
         }
 
@@ -745,6 +892,296 @@
             color: var(--cyan);
         }
 
+        .setup-screen {
+            margin: 7vh auto 0;
+            max-width: 620px;
+        }
+
+        .setup-card {
+            background: linear-gradient(145deg, rgba(25, 33, 61, .98), rgba(18, 24, 47, .98));
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, .28);
+            padding: clamp(24px, 5vw, 44px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .setup-card::before {
+            background: linear-gradient(90deg, var(--cyan), var(--accent), var(--accent-soft));
+            content: '';
+            height: 3px;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .setup-eyebrow {
+            color: var(--cyan);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+
+        .setup-card h2 {
+            font: 700 clamp(1.7rem, 4vw, 2.5rem) 'Space Grotesk', sans-serif;
+            letter-spacing: -.05em;
+            margin: 10px 0 10px;
+        }
+
+        .setup-card > p {
+            color: var(--muted);
+            line-height: 1.6;
+            margin: 0 0 26px;
+        }
+
+        .setup-form,
+        .sheet-form {
+            display: grid;
+            gap: 14px;
+        }
+
+        .setup-field {
+            display: grid;
+            gap: 7px;
+        }
+
+        .setup-field label {
+            color: var(--ink);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .setup-field input {
+            min-height: 46px;
+            width: 100%;
+        }
+
+        .field-hint,
+        .setup-note {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .setup-button {
+            min-height: 46px;
+            margin-top: 4px;
+            width: 100%;
+        }
+
+        .setup-status {
+            color: var(--muted);
+            font-size: 12px;
+            min-height: 18px;
+            text-align: center;
+        }
+
+        .setup-status.error {
+            color: #ff9ab0;
+        }
+
+        .setup-note {
+            border-top: 1px solid rgba(150, 159, 186, .16);
+            margin: 24px 0 0;
+            padding-top: 16px;
+        }
+
+        .sheet-modal-overlay {
+            align-items: center;
+            background: rgba(6, 9, 20, .82);
+            display: flex;
+            inset: 0;
+            justify-content: center;
+            opacity: 0;
+            padding: 18px;
+            pointer-events: none;
+            position: fixed;
+            transition: opacity .2s ease;
+            z-index: 90;
+        }
+
+        .sheet-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .sheet-manager {
+            background: #171d35;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, .42);
+            max-height: min(720px, calc(100vh - 36px));
+            max-width: 620px;
+            overflow: auto;
+            padding: 26px;
+            width: 100%;
+        }
+
+        .sheet-manager-head {
+            align-items: flex-start;
+            display: flex;
+            gap: 12px;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .sheet-manager h2 {
+            font: 700 21px 'Space Grotesk';
+            margin: 0;
+        }
+
+        .sheet-manager-head p {
+            color: var(--muted);
+            font-size: 12px;
+            margin: 5px 0 0;
+        }
+
+        .close-button {
+            align-items: center;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            color: var(--ink);
+            cursor: pointer;
+            display: flex;
+            height: 32px;
+            justify-content: center;
+            width: 32px;
+        }
+
+        .sheet-list {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .sheet-list-item {
+            align-items: center;
+            background: rgba(16, 23, 45, .72);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            padding: 14px 15px;
+            transition: background .2s ease, border-color .2s ease, transform .2s ease;
+        }
+
+        .sheet-list-item.current {
+            background: rgba(112, 217, 210, .09);
+            border-color: rgba(112, 217, 210, .5);
+            box-shadow: inset 3px 0 var(--cyan);
+        }
+
+        .sheet-list-item:hover {
+            background: rgba(102, 136, 255, .1);
+            border-color: rgba(112, 217, 210, .38);
+            transform: translateY(-1px);
+        }
+
+        .sheet-list-copy {
+            align-items: center;
+            display: flex;
+            gap: 9px;
+            min-width: 0;
+        }
+
+        .sheet-list-name {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .sheet-list-current {
+            background: rgba(112, 217, 210, .14);
+            border: 1px solid rgba(112, 217, 210, .28);
+            border-radius: 999px;
+            color: var(--cyan);
+            flex-shrink: 0;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .05em;
+            padding: 4px 7px;
+            text-transform: uppercase;
+        }
+
+        .sheet-list-actions {
+            display: flex;
+            flex-shrink: 0;
+            gap: 6px;
+        }
+
+        .sheet-list-actions button {
+            background: transparent;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            color: var(--muted);
+            cursor: pointer;
+            font: 600 11px 'DM Sans';
+            min-height: 32px;
+            padding: 5px 9px;
+        }
+
+        .sheet-list-actions button:hover {
+            border-color: var(--cyan);
+            color: var(--ink);
+        }
+
+        .sheet-list-actions button[data-action="select"] {
+            background: rgba(112, 217, 210, .12);
+            border-color: rgba(112, 217, 210, .35);
+            color: var(--cyan);
+        }
+
+        .manager-add {
+            border-top: 1px solid rgba(150, 159, 186, .16);
+            padding-top: 20px;
+        }
+
+        .manager-add h3 {
+            font: 700 14px 'Space Grotesk';
+            margin: 0 0 12px;
+        }
+
+        .manager-add .setup-button {
+            min-height: 42px;
+        }
+
+        body.setup-mode .section-nav,
+        body.setup-mode .sheet-header-actions {
+            display: none;
+        }
+
+        .app-toast {
+            background: #202b4d;
+            border: 1px solid rgba(112, 217, 210, .4);
+            border-radius: 10px;
+            bottom: 82px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .3);
+            color: var(--ink);
+            font-size: 12px;
+            left: 50%;
+            max-width: calc(100% - 28px);
+            opacity: 0;
+            padding: 10px 14px;
+            pointer-events: none;
+            position: fixed;
+            transform: translate(-50%, 10px);
+            transition: opacity .2s ease, transform .2s ease;
+            z-index: 120;
+        }
+
+        .app-toast.visible {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
         /* --- MODAL POKÉMON POCKET (OTIMIZADA MOBILE) --- */
         .modal-overlay {
             align-items: center;
@@ -925,16 +1362,62 @@
         @media (max-width: 680px) {
             .shell {
                 width: min(100% - 20px, 520px);
+                padding-top: 18px;
             }
 
             header {
                 align-items: flex-start;
                 flex-direction: column;
-                gap: 18px;
+                gap: 14px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 14px;
+                margin-bottom: 22px;
+            }
+
+            .brand-kicker {
+                margin-bottom: 5px;
+            }
+
+            h1 {
+                font-size: clamp(2.25rem, 11vw, 3.2rem);
+                margin: 4px 0 7px;
+            }
+
+            .brand-subtitle {
+                line-height: 1.45;
+                max-width: 30ch;
+            }
+
+            .sheet-header-actions {
+                justify-content: flex-start;
+                width: 100%;
+            }
+
+            .sheet-action-group {
+                width: 100%;
+            }
+
+            .selected-sheet {
+                flex: 1 1 auto;
+                max-width: none;
+                min-width: 0;
+            }
+
+            .selected-sheet-copy {
+                min-width: 0;
+            }
+
+            .share-button {
+                flex-basis: 44px;
+                min-width: 44px;
             }
 
             .section-nav {
-                width: calc(100% - 16px);
+                width: 100%;
             }
 
             .stats {
@@ -1006,8 +1489,58 @@
 <body>
     <main class="shell">
         <header class="topbar">
-            <h1>Pokédex</h1>
+            <div class="brand-lockup">
+                <p class="brand-kicker">DexViewer</p>
+                <h1>Pokédex</h1>
+                <p class="brand-subtitle">Sua coleção, sempre sincronizada com a planilha.</p>
+            </div>
+            <div class="sheet-header-actions" id="sheetHeaderActions" hidden>
+                <div class="sheet-action-group">
+                    <button class="selected-sheet" type="button" onclick="openSheetManager()" aria-label="Trocar coleção" aria-haspopup="dialog">
+                        <span class="selected-sheet-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+                                <path d="M7.5 3.5h8.2l2.8 2.8v14.2H5.5V5.5a2 2 0 0 1 2-2Z"></path>
+                                <path d="M15.7 3.5v3h2.8M8.5 9.2h7M8.5 12h4.4"></path>
+                                <circle cx="15.8" cy="16.8" r="1.4"></circle>
+                                <path d="M8.5 16.8h3"></path>
+                            </svg>
+                        </span>
+                        <span class="selected-sheet-copy">
+                            <span class="selected-sheet-label">Pokédex selecionada</span>
+                            <strong class="selected-sheet-name" id="selectedSheetName">--</strong>
+                        </span>
+                    </button>
+                    <button class="header-button share-button" type="button" onclick="shareCurrentSheet()" title="Copiar link compartilhável" aria-label="Compartilhar coleção">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle>
+                            <path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </header>
+
+        <section class="setup-screen" id="setupScreen" aria-labelledby="setupTitle" hidden>
+            <div class="setup-card">
+                <span class="setup-eyebrow">Primeiro acesso</span>
+                <h2 id="setupTitle">Conecte sua Pokédex</h2>
+                <p>Cole o link de compartilhamento da sua planilha do Google Sheets. Nós identificamos a planilha e preparamos o CSV automaticamente.</p>
+                <form class="setup-form" onsubmit="registerSheet(event)">
+                    <div class="setup-field">
+                        <label for="setupSheetName">Nome da Pokédex</label>
+                        <input id="setupSheetName" name="sheetName" type="text" placeholder="Ex.: Coleção principal" maxlength="60" required>
+                    </div>
+                    <div class="setup-field">
+                        <label for="setupSheetUrl">Link ou ID da planilha</label>
+                        <input id="setupSheetUrl" name="sheetUrl" type="text" placeholder="https://docs.google.com/spreadsheets/d/..." autocomplete="url" required>
+                        <span class="field-hint">Antes, deixe o acesso como “qualquer pessoa com o link” e permissão de leitor.</span>
+                    </div>
+                    <button class="setup-button" type="submit">Adicionar e abrir Pokédex</button>
+                    <p class="setup-status" id="setupStatus" aria-live="polite"></p>
+                </form>
+                <p class="setup-note">A planilha fica salva somente neste navegador. Você poderá cadastrar várias e trocar entre elas pelo botão no cabeçalho.<br><br>Opcional: use uma coluna chamada <strong>collection</strong> para organizar os Pokémon por região, coleção ou qualquer outro grupo.</p>
+            </div>
+        </section>
 
         <section class="screen active" id="pokedexScreen" aria-label="Pokédex">
             <section class="toolbar" aria-label="Filtros">
@@ -1019,8 +1552,8 @@
                     </svg>
                     <input id="search" type="search" placeholder="Buscar por nome ou número..." oninput="filterGrid()">
                 </label>
-                <select id="regionFilter" aria-label="Filtrar por região" onchange="filterGrid()">
-                    <option value="ALL">Todas as regiões</option>
+                <select id="collectionFilter" aria-label="Filtrar por coleção ou grupo" onchange="filterGrid()">
+                    <option value="ALL">Todas as coleções</option>
                 </select>
                 <select id="statusFilter" aria-label="Filtrar por status" onchange="filterGrid()">
                     <option value="ALL">Todos</option>
@@ -1050,8 +1583,8 @@
 
             <div class="dashboard-grid">
                 <article class="panel">
-                    <h3>Progresso por região</h3>
-                    <div id="regionStats" class="region-list"></div>
+                    <h3>Progresso por coleção</h3>
+                    <div id="collectionStats" class="region-list"></div>
                 </article>
             </div>
         </section>
@@ -1085,6 +1618,34 @@
         </section>
     </main>
 
+    <div class="sheet-modal-overlay" id="sheetManagerModal" onclick="closeSheetManager(event)">
+        <section class="sheet-manager" role="dialog" aria-modal="true" aria-labelledby="sheetManagerTitle" onclick="event.stopPropagation()">
+            <div class="sheet-manager-head">
+                <div>
+                    <h2 id="sheetManagerTitle">Suas Pokédex</h2>
+                    <p>Escolha uma coleção salva ou cadastre outra.</p>
+                </div>
+                <button class="close-button" type="button" onclick="closeSheetManager()" aria-label="Fechar">×</button>
+            </div>
+            <div class="sheet-list" id="sheetList"></div>
+            <div class="manager-add">
+                <h3>Adicionar nova planilha</h3>
+                <form class="sheet-form" onsubmit="registerSheet(event)">
+                    <div class="setup-field">
+                        <label for="managerSheetName">Nome da Pokédex</label>
+                        <input id="managerSheetName" name="sheetName" type="text" placeholder="Ex.: Cartas para trocar" maxlength="60" required>
+                    </div>
+                    <div class="setup-field">
+                        <label for="managerSheetUrl">Link ou ID da planilha</label>
+                        <input id="managerSheetUrl" name="sheetUrl" type="text" placeholder="Cole o link do Google Sheets" required>
+                    </div>
+                    <button class="setup-button" type="submit">Salvar planilha</button>
+                    <p class="setup-status" id="managerStatus" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+    </div>
+
     <!-- Modal Pocket View -->
     <div class="modal-overlay" id="cardModal" onclick="closeModal(event)">
         <div class="modal-content">
@@ -1098,6 +1659,8 @@
             </div>
         </div>
     </div>
+
+    <div class="app-toast" id="appToast" role="status" aria-live="polite"></div>
 
     <nav class="section-nav" aria-label="Navegação principal">
         <button class="nav-tab active" type="button" data-screen="pokedex" onclick="setScreen('pokedex')"
@@ -1127,7 +1690,8 @@
     </nav>
 
     <script>
-        const CSV_URL = 'https://docs.google.com/spreadsheets/d/1ncztc6ySbYxSqXPeQKgQjztWfI_UiO1fYHBrvzvhD7Y/gviz/tq?tqx=out:csv&gid=0';
+        const SHEETS_KEY = 'dexviewer-sheets-v2';
+        const ACTIVE_SHEET_KEY = 'dexviewer-active-sheet-v2';
         const API_CACHE_KEY = 'dexviewer-pokeapi-v1';
         const ART_STYLE_KEY = 'dexviewer-art-style';
         const CACHE_TTL = 7 * 24 * 60 * 60 * 1000;
@@ -1136,6 +1700,9 @@
         let pokemonData = [];
         let apiData = {};
         let artStyle = localStorage.getItem(ART_STYLE_KEY) || 'pixel';
+        let sheets = [];
+        let activeSheet = null;
+        let sheetLoadVersion = 0;
         let isCurrentCardCaught = false;
         let foilObserver = null;
         let gridRenderVersion = 0;
@@ -1163,24 +1730,331 @@
             return baseName.charAt(0).toUpperCase() + baseName.slice(1);
         }
 
-        function parseCSVLine(line) {
-            const result = []; let current = ''; let inQuotes = false;
-            for (const char of line) {
-                if (char === '"') inQuotes = !inQuotes;
-                else if (char === ',' && !inQuotes) { result.push(current.trim().replace(/^"|"$/g, '')); current = ''; }
-                else current += char;
+        function parseCSVRows(data) {
+            const rows = [];
+            let row = [];
+            let value = '';
+            let quoted = false;
+
+            for (let index = 0; index < data.length; index += 1) {
+                const char = data[index];
+                const next = data[index + 1];
+                if (char === '"') {
+                    if (quoted && next === '"') {
+                        value += '"';
+                        index += 1;
+                    } else {
+                        quoted = !quoted;
+                    }
+                } else if (char === ',' && !quoted) {
+                    row.push(value.trim());
+                    value = '';
+                } else if ((char === '\n' || char === '\r') && !quoted) {
+                    if (char === '\r' && next === '\n') index += 1;
+                    row.push(value.trim());
+                    if (row.some(cell => cell !== '')) rows.push(row);
+                    row = [];
+                    value = '';
+                } else {
+                    value += char;
+                }
             }
-            result.push(current.trim().replace(/^"|"$/g, '')); return result;
+
+            row.push(value.trim());
+            if (row.some(cell => cell !== '')) rows.push(row);
+            return rows;
+        }
+
+        function parseCSVLine(line) {
+            return parseCSVRows(line)[0] || [];
         }
 
         function readCache(key) { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch { return null; } }
         function writeCache(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { } }
 
+        function sheetKey(sheet) {
+            return `${sheet.id}::${sheet.gid || '0'}`;
+        }
+
+        function buildCsvUrl(id, gid = '0') {
+            return `https://docs.google.com/spreadsheets/d/${encodeURIComponent(id)}/gviz/tq?tqx=out:csv&gid=${encodeURIComponent(gid)}`;
+        }
+
+        function parseSheetReference(value, preferredGid = '') {
+            const input = String(value || '').trim();
+            if (!input) return null;
+
+            let id = '';
+            let gid = String(preferredGid || '').trim() || '0';
+            const googleMatch = input.match(/\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/);
+
+            if (googleMatch) {
+                id = googleMatch[1];
+                try {
+                    const parsedUrl = new URL(input);
+                    gid = parsedUrl.searchParams.get('gid') || gid;
+                    const hashGid = parsedUrl.hash.match(/gid=([0-9]+)/);
+                    if (hashGid) gid = hashGid[1];
+                } catch (error) { }
+            } else {
+                try {
+                    const parsedUrl = new URL(input, window.location.href);
+                    const appId = parsedUrl.searchParams.get('sheet') || parsedUrl.searchParams.get('spreadsheetId');
+                    if (appId) {
+                        id = appId;
+                        gid = parsedUrl.searchParams.get('gid') || gid;
+                    }
+                } catch (error) { }
+                if (!id && /^[a-zA-Z0-9_-]{10,}$/.test(input)) id = input;
+            }
+
+            if (!id || !/^[a-zA-Z0-9_-]{10,}$/.test(id)) return null;
+            return { id, gid: String(gid || '0'), csvUrl: buildCsvUrl(id, gid) };
+        }
+
+        function normalizeSheetRecord(sheet) {
+            if (!sheet || !sheet.id) return null;
+            const reference = parseSheetReference(sheet.id, sheet.gid);
+            if (!reference) return null;
+            return {
+                ...reference,
+                name: String(sheet.name || '').trim() || `Pokédex ${reference.id.slice(0, 6)}`,
+                key: `${reference.id}::${reference.gid}`
+            };
+        }
+
+        function saveSheets() {
+            writeCache(SHEETS_KEY, sheets.map(({ key, ...sheet }) => sheet));
+        }
+
+        function updateSheetUrl(sheet) {
+            try {
+                const url = new URL(window.location.href);
+                url.searchParams.set('sheet', sheet.id);
+                if (sheet.gid && sheet.gid !== '0') url.searchParams.set('gid', sheet.gid);
+                else url.searchParams.delete('gid');
+                url.searchParams.delete('spreadsheetId');
+                url.searchParams.delete('id');
+                url.hash = '';
+                window.history.replaceState(null, '', `${url.pathname}${url.search}`);
+            } catch (error) {
+                console.warn('Não foi possível atualizar a URL da planilha:', error);
+            }
+        }
+
+        function getRequestedSheet() {
+            const currentUrl = new URL(window.location.href);
+            const rawReference = currentUrl.searchParams.get('sheet') || currentUrl.searchParams.get('spreadsheetId') || currentUrl.searchParams.get('id');
+            if (rawReference) return parseSheetReference(rawReference, currentUrl.searchParams.get('gid') || '0');
+
+            const hashParams = new URLSearchParams(currentUrl.hash.replace(/^#/, ''));
+            const hashReference = hashParams.get('sheet') || hashParams.get('spreadsheetId') || hashParams.get('id');
+            if (hashReference) return parseSheetReference(hashReference, hashParams.get('gid') || '0');
+
+            const pathParts = currentUrl.pathname.split('/').filter(Boolean);
+            const lastPart = pathParts[pathParts.length - 1] || '';
+            if (lastPart !== 'index.html' && lastPart !== 'pokedex-sheet' && /^[a-zA-Z0-9_-]{10,}$/.test(lastPart)) {
+                return parseSheetReference(lastPart, currentUrl.searchParams.get('gid') || '0');
+            }
+            return null;
+        }
+
+        function escapeHtml(value) {
+            return String(value || '').replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
+        }
+
+        function updateHeaderSheet() {
+            const headerActions = document.getElementById('sheetHeaderActions');
+            const sheetName = document.getElementById('selectedSheetName');
+            if (!activeSheet) {
+                headerActions.hidden = true;
+                return;
+            }
+            sheetName.textContent = activeSheet.name;
+            sheetName.title = activeSheet.name;
+            document.title = `${activeSheet.name} | Pokédex`;
+            headerActions.hidden = false;
+        }
+
+        function setSetupStatus(message, isError = false, targetId = 'setupStatus') {
+            const target = document.getElementById(targetId);
+            if (!target) return;
+            target.textContent = message;
+            target.classList.toggle('error', isError);
+        }
+
+        let toastTimer = null;
+        function showToast(message) {
+            const toast = document.getElementById('appToast');
+            if (!toast) return;
+            toast.textContent = message;
+            toast.classList.add('visible');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.remove('visible'), 2800);
+        }
+
+        function showSetup() {
+            activeSheet = null;
+            document.body.classList.add('setup-mode');
+            document.getElementById('setupScreen').hidden = false;
+            document.querySelectorAll('.screen').forEach(screen => { screen.hidden = true; screen.classList.remove('active'); });
+            updateHeaderSheet();
+        }
+
+        function showAppShell() {
+            document.body.classList.remove('setup-mode');
+            document.getElementById('setupScreen').hidden = true;
+            updateHeaderSheet();
+            setScreen('pokedex');
+        }
+
+        async function registerSheet(event) {
+            event.preventDefault();
+            const form = event.currentTarget;
+            const name = String(form.elements.sheetName.value || '').trim();
+            const reference = parseSheetReference(form.elements.sheetUrl.value);
+            const statusId = form.closest('#sheetManagerModal') ? 'managerStatus' : 'setupStatus';
+
+            if (!reference) {
+                setSetupStatus('Não consegui identificar a planilha. Cole um link do Google Sheets ou o ID completo.', true, statusId);
+                return;
+            }
+
+            const nextSheet = normalizeSheetRecord({ ...reference, name });
+            const existingIndex = sheets.findIndex(sheet => sheet.key === nextSheet.key);
+            if (existingIndex >= 0) sheets[existingIndex] = nextSheet;
+            else sheets.push(nextSheet);
+            saveSheets();
+            await activateSheet(nextSheet);
+            form.reset();
+            setSetupStatus('', false, statusId);
+            closeSheetManager();
+        }
+
+        async function activateSheet(sheet) {
+            const normalizedSheet = normalizeSheetRecord(sheet);
+            if (!normalizedSheet) return;
+
+            activeSheet = sheets.find(savedSheet => savedSheet.key === normalizedSheet.key) || normalizedSheet;
+            if (!activeSheet) return;
+            updateSheetUrl(activeSheet);
+            localStorage.setItem(ACTIVE_SHEET_KEY, activeSheet.key);
+            showAppShell();
+            await loadPokedex();
+        }
+
+        function loadSheetFromButton(button) {
+            if (button?.dataset?.loading === 'true') return;
+            if (button) {
+                button.dataset.loading = 'true';
+                button.disabled = true;
+            }
+            const selectedKey = button?.dataset?.sheetKey;
+            const sheet = sheets.find(savedSheet => savedSheet.key === selectedKey);
+            if (!sheet) {
+                showToast('Esta planilha não está mais cadastrada.');
+                if (button) {
+                    button.dataset.loading = 'false';
+                    button.disabled = false;
+                }
+                return;
+            }
+
+            closeSheetManager();
+            showToast(`Carregando ${sheet.name}…`);
+            activateSheet(sheet).catch(error => {
+                console.error('Erro ao carregar a planilha:', error);
+                showToast('Não foi possível carregar esta planilha.');
+            });
+        }
+
+        function renderSheetList() {
+            const list = document.getElementById('sheetList');
+            list.innerHTML = '';
+            sheets.forEach(sheet => {
+                const item = document.createElement('div');
+                item.className = `sheet-list-item${activeSheet?.key === sheet.key ? ' current' : ''}`;
+                item.innerHTML = `
+                    <div class="sheet-list-copy">
+                        <span class="sheet-list-name">${escapeHtml(sheet.name)}</span>
+                        ${activeSheet?.key === sheet.key ? '<span class="sheet-list-current">Atual</span>' : ''}
+                    </div>
+                    <div class="sheet-list-actions">
+                        <button type="button" data-action="select" data-sheet-key="${escapeHtml(sheet.key)}" onclick="loadSheetFromButton(this)">Carregar</button>
+                        <button type="button" data-action="share">Compartilhar</button>
+                    </div>`;
+                const selectButton = item.querySelector('[data-action="select"]');
+                selectButton.addEventListener('click', () => loadSheetFromButton(selectButton));
+                item.querySelector('[data-action="share"]').addEventListener('click', () => shareSheet(sheet));
+                list.appendChild(item);
+            });
+        }
+
+        function openSheetManager() {
+            renderSheetList();
+            document.getElementById('sheetManagerModal').classList.add('active');
+        }
+
+        function closeSheetManager(event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById('sheetManagerModal').classList.remove('active');
+        }
+
+        function getShareUrl(sheet) {
+            const shareUrl = new URL(window.location.href);
+            shareUrl.search = '';
+            shareUrl.hash = '';
+            shareUrl.searchParams.set('sheet', sheet.id);
+            if (sheet.gid && sheet.gid !== '0') shareUrl.searchParams.set('gid', sheet.gid);
+            return shareUrl.toString();
+        }
+
+        async function shareSheet(sheet) {
+            const url = getShareUrl(sheet);
+            try {
+                if (navigator.share) await navigator.share({ title: sheet.name, url });
+                else await navigator.clipboard.writeText(url);
+                showToast(navigator.share ? 'Compartilhamento aberto.' : 'Link compartilhável copiado.');
+                setSetupStatus('', false, 'managerStatus');
+            } catch (error) {
+                if (error?.name !== 'AbortError') window.prompt('Copie este link para compartilhar:', url);
+            }
+        }
+
+        function shareCurrentSheet() {
+            if (activeSheet) shareSheet(activeSheet);
+        }
+
+        async function initializeSheets() {
+            sheets = (readCache(SHEETS_KEY) || []).map(normalizeSheetRecord).filter(Boolean);
+            saveSheets();
+            const requestedSheet = getRequestedSheet();
+            if (requestedSheet) {
+                const requestedKey = `${requestedSheet.id}::${requestedSheet.gid}`;
+                const existing = sheets.find(sheet => sheet.key === requestedKey);
+                if (existing) {
+                    activeSheet = existing;
+                } else {
+                    activeSheet = normalizeSheetRecord({ ...requestedSheet, name: `Pokédex ${requestedSheet.id.slice(0, 6)}` });
+                    sheets.push(activeSheet);
+                    saveSheets();
+                }
+                await activateSheet(activeSheet);
+                return;
+            }
+
+            const savedActiveKey = localStorage.getItem(ACTIVE_SHEET_KEY);
+            activeSheet = sheets.find(sheet => sheet.key === savedActiveKey) || sheets[0] || null;
+            if (activeSheet) await activateSheet(activeSheet);
+            else showSetup();
+        }
+
         function findColumn(headers, names) {
+            const normalizedNames = names.map(name => String(name).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, ''));
             return headers.findIndex(h => {
                 const raw = h.trim().toLowerCase();
                 const norm = raw.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
-                return names.includes(raw) || names.includes(norm);
+                return names.includes(raw) || normalizedNames.includes(norm);
             });
         }
 
@@ -1188,39 +2062,25 @@
             return ['true', 'sim', 'yes', '1', 'x', 'foil', 'holo', 'brilhante'].includes(String(value || '').trim().toLowerCase());
         }
 
-        function getRegionByDexId(id) {
-            const dexId = Number(id);
-            if (dexId <= 151) return 'Kanto';
-            if (dexId <= 251) return 'Johto';
-            if (dexId <= 386) return 'Hoenn';
-            if (dexId <= 493) return 'Sinnoh';
-            if (dexId <= 649) return 'Unova';
-            if (dexId <= 721) return 'Kalos';
-            if (dexId <= 809) return 'Alola';
-            if (dexId <= 898) return 'Galar';
-            if (dexId <= 905) return 'Hisui';
-            return 'Paldea';
-        }
-
         function parseSheet(data) {
-            const rows = data.split(/\r?\n/).filter(r => r.trim());
+            const rows = parseCSVRows(data);
             if (rows.length < 2) return [];
 
-            const headers = parseCSVLine(rows[0]);
+            const headers = rows[0];
 
             let idCol = findColumn(headers, ['index', 'id']);
             let nameCol = findColumn(headers, ['pokemon', 'nome', 'name']);
             let foilCol = findColumn(headers, ['foil']);
             let cardCol = findColumn(headers, ['card_url', 'url', 'link']);
             let caughtCol = findColumn(headers, ['caught', 'capturado', 'pego', 'status']);
+            let collectionCol = findColumn(headers, ['collection', 'colecao', 'coleção', 'group', 'grupo', 'category', 'categoria']);
 
             if (idCol < 0) idCol = 0;
             if (nameCol < 0) nameCol = 1;
             if (foilCol < 0) foilCol = 2;
             if (cardCol < 0) cardCol = 3;
 
-            return rows.slice(1).map((row, index) => {
-                const cols = parseCSVLine(row);
+            return rows.slice(1).map((cols, index) => {
                 if (cols.length < 2) return null;
 
                 const rawId = cols[idCol] ? cols[idCol].replace(/\D/g, '') : '';
@@ -1230,6 +2090,7 @@
 
                 const cardUrl = (cardCol >= 0 && cols[cardCol]) ? cols[cardCol].trim() : '';
                 const foil = parseBoolean(cols[foilCol]);
+                const collection = collectionCol >= 0 ? String(cols[collectionCol] || '').trim() : '';
 
                 // Verifica a coluna 'caught'/'capturado' na planilha
                 const isCaughtFromCol = caughtCol >= 0 ? parseBoolean(cols[caughtCol]) : false;
@@ -1241,7 +2102,7 @@
                     id,
                     caught,
                     name,
-                    region: getRegionByDexId(id),
+                    collection,
                     foil,
                     cardUrl,
                     sourceCardUrl: cardUrl
@@ -1250,46 +2111,56 @@
         }
 
         async function loadPokedex() {
+            if (!activeSheet) return;
+            let apiCache = null;
+            let loadSucceeded = false;
+            const loadVersion = ++sheetLoadVersion;
+            const sheetAtStart = activeSheet;
+            const grid = document.getElementById('pokedexGrid');
+            gridRenderVersion += 1;
+            if (foilObserver) foilObserver.disconnect();
+            pokemonData = [];
+            document.getElementById('search').value = '';
+            document.getElementById('collectionFilter').value = 'ALL';
+            document.getElementById('statusFilter').value = 'ALL';
+            document.getElementById('pokedexGrid').innerHTML = '<div class="empty">Carregando sua Pokédex…</div>';
+            document.getElementById('cacheNotice').textContent = `Conectando a ${sheetAtStart.name}…`;
             try {
-                const response = await fetch(CSV_URL, { cache: 'no-store' });
+                const response = await fetch(sheetAtStart.csvUrl, { cache: 'no-store' });
                 if (!response.ok) throw new Error('Servidor da planilha respondeu com erro.');
 
                 const csvText = await response.text();
+                if (loadVersion !== sheetLoadVersion) return;
                 pokemonData = parseSheet(csvText);
+                if (!pokemonData.length) throw new Error('A planilha não contém linhas de dados válidas.');
 
+                apiCache = readCache(API_CACHE_KEY);
+                if (apiCache?.data) apiData = apiCache.data;
                 render();
+                loadSucceeded = true;
                 setCacheNotice(Date.now(), 'Planilha sincronizada com sucesso');
+                showToast(`${sheetAtStart.name} carregada.`);
             } catch (error) {
+                if (loadVersion !== sheetLoadVersion) return;
                 console.error("Erro ao carregar a Pokédex:", error);
                 document.getElementById('cacheNotice').innerHTML = `<strong style="color:#ff9ab0;">Erro:</strong> ${error.message}`;
+                document.getElementById('pokedexGrid').innerHTML = '<div class="empty">Não foi possível carregar esta planilha. Verifique o compartilhamento e tente novamente.</div>';
+                showToast(`Falha ao carregar: ${error.message}`);
             }
 
-            const apiCache = readCache(API_CACHE_KEY);
-            if (apiCache?.data) apiData = apiCache.data;
-            if (!apiCache?.savedAt || Date.now() - apiCache.savedAt > CACHE_TTL) syncPokeApi();
+            if (loadSucceeded && (!apiCache?.savedAt || Date.now() - apiCache.savedAt > CACHE_TTL)) syncPokeApi();
         }
 
         function setCacheNotice(timestamp, label) {
             document.getElementById('cacheNotice').innerHTML = `<strong>${label}</strong> · ${timestamp ? `atualizado em ${new Date(timestamp).toLocaleDateString('pt-BR')}` : 'pronto para sincronizar'}`;
         }
 
-        function populateRegions() {
-            const select = document.getElementById('regionFilter');
+        function populateCollections() {
+            const select = document.getElementById('collectionFilter');
             const current = select.value;
-            const releaseOrder = ['kanto', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos', 'alola', 'galar', 'hisui', 'paldea'];
-            const normalizeRegion = region => region.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
-            const regions = [...new Set(pokemonData.map(p => p.region))].filter(Boolean);
+            const regions = [...new Set(pokemonData.map(p => p.collection).filter(Boolean))];
 
-            regions.sort((first, second) => {
-                const firstIndex = releaseOrder.indexOf(normalizeRegion(first));
-                const secondIndex = releaseOrder.indexOf(normalizeRegion(second));
-                if (firstIndex < 0 && secondIndex < 0) return first.localeCompare(second, 'pt-BR');
-                if (firstIndex < 0) return 1;
-                if (secondIndex < 0) return -1;
-                return firstIndex - secondIndex;
-            });
-
-            select.innerHTML = '<option value="ALL">Todas as regiões</option>';
+            select.innerHTML = '<option value="ALL">Todas as coleções</option>';
             regions.forEach(r => {
                 select.add(new Option(r, r));
             });
@@ -1305,7 +2176,7 @@
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.toggle('active', t.dataset.screen === screenName));
         }
 
-        function render() { populateRegions(); updateStats(); filterGrid(); }
+        function render() { populateCollections(); updateStats(); filterGrid(); }
 
         function getPokemonImage(extra, style, id) {
             const official = extra?.sprites?.official || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
@@ -1321,12 +2192,12 @@
 
         function filterGrid() {
             const search = document.getElementById('search').value.toLowerCase().trim();
-            const region = document.getElementById('regionFilter').value;
+            const collection = document.getElementById('collectionFilter').value;
             const status = document.getElementById('statusFilter').value;
 
             const filtered = pokemonData.filter(p =>
                 (!search || p.name.toLowerCase().includes(search) || String(p.id).includes(search)) &&
-                (region === 'ALL' || p.region === region) &&
+                (collection === 'ALL' || p.collection === collection) &&
                 (status === 'ALL' || (status === 'CAUGHT' ? p.caught : !p.caught))
             );
             renderGrid(filtered);
@@ -1430,26 +2301,18 @@
                 return;
             }
 
-            const releaseOrder = ['kanto', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos', 'alola', 'galar', 'hisui', 'paldea'];
-            const normalizeRegion = region => region.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
             const grouped = list.reduce((groups, pokemon) => {
-                const region = pokemon.region || 'Sem região';
+                const region = pokemon.collection || 'Sem coleção';
                 (groups[region] ||= []).push(pokemon);
                 return groups;
             }, {});
 
-            const regions = Object.keys(grouped).sort((first, second) => {
-                const firstIndex = releaseOrder.indexOf(normalizeRegion(first));
-                const secondIndex = releaseOrder.indexOf(normalizeRegion(second));
-                if (firstIndex < 0 && secondIndex < 0) return first.localeCompare(second, 'pt-BR');
-                if (firstIndex < 0) return 1;
-                if (secondIndex < 0) return -1;
-                return firstIndex - secondIndex;
-            });
+            const regions = Object.keys(grouped);
+            const normalizeCollection = collection => collection.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
 
             regions.forEach((region, regionIndex) => {
                 const section = document.createElement('section');
-                const regionId = `region-${normalizeRegion(region).replace(/[^a-z0-9]+/g, '-')}`;
+                const regionId = `collection-${normalizeCollection(region).replace(/[^a-z0-9]+/g, '-')}`;
                 section.className = 'region-section';
                 section.setAttribute('aria-labelledby', regionId);
                 section.innerHTML = `
@@ -1539,27 +2402,27 @@
             document.getElementById('caughtStat').textContent = caught;
             document.getElementById('missingStat').textContent = missing;
 
-            const regionStatsMap = pokemonData.reduce((acc, p) => {
-                const r = p.region || 'Sem região';
+            const collectionStatsMap = pokemonData.reduce((acc, p) => {
+                const r = p.collection || 'Sem coleção';
                 if (!acc[r]) acc[r] = { total: 0, caught: 0 };
                 acc[r].total += 1;
                 if (p.caught) acc[r].caught += 1;
                 return acc;
             }, {});
 
-            const regionStatsContainer = document.getElementById('regionStats');
-            regionStatsContainer.innerHTML = '';
+            const collectionStatsContainer = document.getElementById('collectionStats');
+            collectionStatsContainer.innerHTML = '';
 
-            Object.entries(regionStatsMap).forEach(([region, data]) => {
+            Object.entries(collectionStatsMap).forEach(([collection, data]) => {
                 const pct = data.total ? Math.round((data.caught / data.total) * 100) : 0;
                 const row = document.createElement('div');
                 row.className = 'region-line';
                 row.innerHTML = `
-                    <span>${region} (${data.caught}/${data.total})</span>
+                    <span>${collection} (${data.caught}/${data.total})</span>
                     <strong style="font-size: 12px;">${pct}%</strong>
                     <div class="bar" style="grid-column: 1 / -1;"><i style="width: ${pct}%;"></i></div>
                 `;
-                regionStatsContainer.appendChild(row);
+                collectionStatsContainer.appendChild(row);
             });
         }
 
@@ -1654,7 +2517,7 @@
             }
 
             modalTitle.textContent = `#${String(pokemon.id).padStart(3, '0')} - ${displayName.toUpperCase()}`;
-            modalSub.textContent = `${pokemon.region} • ${pokemon.caught ? (pokemon.foil ? 'Foil Capturado' : 'Capturado') : 'Não registrado'}`;
+            modalSub.textContent = `${pokemon.collection || 'Sem coleção'} • ${pokemon.caught ? (pokemon.foil ? 'Foil Capturado' : 'Capturado') : 'Não registrado'}`;
 
             modal.classList.add('active');
             document.body.classList.add('modal-open');
@@ -1747,7 +2610,7 @@
         modal.addEventListener('pointerleave', resetModalCard);
 
         document.getElementById('artStyle').value = artStyle;
-        loadPokedex();
+        initializeSheets();
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
