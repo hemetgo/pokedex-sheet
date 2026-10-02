@@ -1719,7 +1719,7 @@
         @media (max-width: 680px) {
             .shell {
                 width: min(100% - 20px, 520px);
-                padding-top: 18px;
+                padding-top: 12px;
             }
 
             header {
@@ -1729,56 +1729,63 @@
             }
 
             .topbar {
-                align-items: flex-start;
-                flex-direction: column;
-                gap: 14px;
-                margin-bottom: 22px;
+                align-items: center;
+                flex-direction: row;
+                gap: 10px;
+                margin-bottom: 14px;
                 min-height: 0;
             }
 
             .brand-lockup {
-                max-width: 100%;
+                flex: 1 1 auto;
+                max-width: calc(100% - 94px);
                 position: static;
+                text-align: left;
                 transform: none;
-                width: 100%;
+                width: auto;
             }
 
             .brand-kicker {
-                margin-bottom: 5px;
+                display: none;
             }
 
             h1 {
-                font-size: clamp(2.25rem, 11vw, 3.2rem);
-                margin: 4px 0 7px;
+                font-size: clamp(1.85rem, 9vw, 2.35rem);
+                margin: 0;
+                white-space: nowrap;
             }
 
             .brand-subtitle {
-                line-height: 1.45;
-                max-width: 30ch;
+                display: none;
             }
 
             .sheet-header-actions {
-                justify-content: flex-start;
-                width: 100%;
+                flex: 0 0 auto;
+                justify-content: flex-end;
+                width: auto;
             }
 
             .sheet-action-group {
-                width: 100%;
+                width: auto;
             }
 
             .selected-sheet {
-                flex: 1 1 auto;
-                max-width: none;
-                min-width: 0;
+                flex: 0 0 40px;
+                height: 40px;
+                justify-content: center;
+                max-width: 40px;
+                min-width: 40px;
+                padding: 8px;
             }
 
             .selected-sheet-copy {
-                min-width: 0;
+                display: none;
             }
 
             .share-button {
-                flex-basis: 44px;
-                min-width: 44px;
+                flex-basis: 40px;
+                height: 40px;
+                min-width: 40px;
             }
 
             .stats {
